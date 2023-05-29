@@ -49,7 +49,8 @@ Setting up a database connection (using PDO)
 fetchOne(ID)
 save(array) → both update/create
 delete(ID)
-app/views
+
+#### app/views
 Your view files.
 The structure is made so that having a controller named TestController, it looks
 in the app/views/test/ folder for it’s view files.
