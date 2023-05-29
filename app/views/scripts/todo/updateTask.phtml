@@ -1,0 +1,40 @@
+<?php include ('partials/header.phtml') ?>
+<div class="grid grid-cols-3 gap-1">
+     <div></div>
+     <div class="max-w-sm rounded overflow-hidden shadow-lg">
+          <div class="text-xl pb-5 pl-20 pt-10">
+          UPDATE TASK
+          </div>
+          <div>
+               <form method="POST" action="">
+                    <div>   
+                    <label class="pr-2" for="name" > Name</label>
+                    <input  class="pb-2" type="text" id="name" name="name" value="<?php echo $this->task['name'];?>">
+                    </div>
+                    <div>
+                    <label class="pr-2" for="status" > Status </label>
+                    <input  class="pb-2" type="text" id="status" name="status" value="<?php echo $this->task['status'];?>" >
+                    </div>
+                    <div>
+                    <label class="pr-2" for="start_time" > Start-Time</label>
+                    <label  class="pb-2" type="text" id="start-time" name="start_time" >Data</label>
+                    </div>
+                    <div>
+                    <label class="pr-2" for="end_time" >End-Time</label>
+                    <label  class="pb-2" type="text" id="end-time" name="end_time">Data</label>
+                    </div>
+                    <div>
+                    <label class="pr-2" for="author" > Author</label>
+                    <input  class="pb-5" type="text" id="author" name="author" value="<?php echo $this->task['author'];?>" >
+                    </div>
+                    <div class="pb-5 pl-20">
+                    <button class=" pb-2 bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Save your changes</button>
+                    </br>
+                    </div>
+               </form> 
+          </div> 
+     </div>
+     <div class="pt-5"></div>    
+</div>
+
+<?php include ('partials/footer.phtml') ?>

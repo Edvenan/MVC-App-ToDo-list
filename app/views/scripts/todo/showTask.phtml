@@ -1,0 +1,35 @@
+<?php include ('partials/header.phtml') ?>
+
+   
+<div class="grid grid-cols-3 gap-1">
+   <div></div>
+   <div>
+     <div class="pl-20 pb-5 text-xl"> TASK VIEW</div>
+     <table>
+        <tr> 
+            <th class="p-2"> Task</th>
+            <td class="p-2"><?php echo $this->task['name'];?> </td>
+        </tr>
+        <tr> 
+            <th class="p-2"> Author</th>
+            <td class="p-2"><?php echo $this->task['author'];?></td>
+        </tr>
+        <tr> 
+            <th class="p-2"> Start</th>
+            <td class="p-2"> <?php echo $this->task['start_time'];?></td>
+        </tr>
+        <tr> 
+            <th class="p-2"> End </th>
+            <td class="p-2"><?php echo $this->task['end_time'];?> </td>
+        </tr>
+        <tr> 
+            <th class="p-2"> Status </th>
+            <td class="p-2"><?php echo $this->task['status'];?> </td>
+        </tr>
+
+     </table>
+
+   </div>
+   <div></div>
+</div>   
+<?php include ('partials/footer.phtml') ?>
