@@ -8,27 +8,22 @@
     <title>Document</title>
 </head>
 <header>
-    <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-pink-500 mb-3">
-    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div class="font-sans text-xl text-black w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
-            <a class="px-3 py-2 flex items-center uppercase font-sans text-xl text-black leading-snug hover:opacity-75" href="showAll">   TO DO 
-            </a>
-        </div>
-        <div class="lg:flex flex-grow items-center" id="example-navbar-warning">
-        <ul class="flex flex-col lg:flex-row list-none ml-auto">
-            <li class="nav-item">
-                <a class="px-3 py-2 flex items-center uppercase font-sans text-xl text-black leading-snug hover:opacity-75" href="create">
-                   ADD NEW TASK
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="px-3 py-2 flex items-center uppercase font-sans text-xl text-black leading-snug hover:opacity-75" href="showAll">
-                SHOW ALL TASKS
-                </a>
-            </li>
-        </ul>
-        </div>
-      </div>
-    </nav>
+<div class="w-full h-full flex justify-center mx-auto">
+<nav class="flex justify-between overflow-x-auto bg-pink-700 sm:bg-gray-700 md:bg-blue-700 lg:bg-pink-700 text-white w-full xs:p-4 items-center">
+  <!-- Contenido del nav -->
+
+
+    <div class="px-5 xl:px-12 py-6 flex w-full">
+      <ul class="flex md:flex lg:flex sm:flex-row xs:flex-col uppercase px-2 mx-auto font-semibold font-heading space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-12 items-center">
+        <li class="text-center mr-14">
+          <a class="flex hover:text-red-200" href="create">Add New Task</a>
+        </li>
+        <li class="text-center">
+          <a class="hover:text-gray-200" href="showAll">Show all Tasks</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 </header>
 <body>
