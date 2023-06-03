@@ -38,7 +38,14 @@ class ToDoModel_json {
 
     }
     
+    // READ: method that returns an array containing all tasks
+    public function getTasks(): array{
+        (string) $jsonFile = file_get_contents(ROOT_PATH.'/app/models/data/json/data.json');
+        (array) $tasks = json_decode($jsonFile, true);  // returns array of task objects
+        return $tasks;
+    }
 
+    
     ###############################################
     # HELPER FUNCTIONS                            #    
     ###############################################
