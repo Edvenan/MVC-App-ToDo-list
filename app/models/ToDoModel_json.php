@@ -39,4 +39,23 @@ class ToDoModel_json {
     }
     
 
+    ###############################################
+    # HELPER FUNCTIONS                            #    
+    ###############################################
+    
+    // method that saves an array containing all tasks to a json DataBase
+    // after a task update or a create new task
+    public function saveTasks(array $tasks): bool | string {
+
+        foreach($tasks as $k => $task){
+            $tasks_json[] = $task;
+        }
+
+        // save all tasks to json
+        $result = file_put_contents(ROOT_PATH.'/app/models/data/json/data.json', json_encode($tasks_json, JSON_PRETTY_PRINT));
+        if (!$result){
+            return "json uptdate/insert failed";
+        }
+        return true;
+    }
 }
