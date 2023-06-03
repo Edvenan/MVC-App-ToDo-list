@@ -62,7 +62,6 @@ class ToDoController extends Controller
         }
     }
 
-
 	public function deleteTaskAction(){
 
         if(isset($_GET['id'])) {
@@ -101,36 +100,47 @@ class ToDoController extends Controller
         $this->view->tasks = $tasks;
     }
 
-	public function updateTaskAction(){
-        
+    // UPDATE TASK
+    public function updateTaskAction(){
+
         $this -> showTaskAction();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $todo = new ToDoModel();
-            $taskId = $_GET['id'];
+            if ((!empty($_POST["name"])) && (!empty($_POST["author"]))) {
 
-            //Recollim les noves dades
-            $newData = $_POST;
+                $taskId = $_GET['id'];
 
-            //Les enviem al model
-            $todo -> updateTask($newData, $taskId);
-             
-            //Redirigim al llistat total
-            header("Location: showAll");
-            exit;
-            
-            //tests
-            /*echo '<pre>';
-            var_dump($task);
-            echo '<pre>';
+                //Recollim les noves dades
+                $newData['name']   = $_POST['name'];
+                $newData['status'] = $_POST['status'];
+                $newData['author'] = $_POST['author'];
 
-            echo '<pre>';
-            var_dump($_POST);
-            echo '<pre>';*/
-        
-        } 
+                //Les enviem al model
+                $todo = $this-> setModel();
+
+                $result = $todo -> updateTask($newData, $taskId);
+
+                if (!$result){
+                    throw new Exception("Update failed.");
+
+                } else {
+                    //Redirigim al llistat total
+                    header("Location: showAll");
+                    exit;
+                }
+
+            } elseif((empty($_POST["name"])) OR (empty($_POST["author"]))) {
+
+                throw new Exception("Name and Author fields are required.");
+
+            }
+
+        }
+
+
     }
+
     ###############################################
     # HELPER FUNCTIONS                            #
     ###############################################
