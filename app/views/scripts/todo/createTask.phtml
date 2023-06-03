@@ -1,7 +1,8 @@
 <?php include('partials/header.phtml') ?>
 
-<div class="container mx-auto max-w-2xl mt-10 mx-auto">
-     <div class="flex items-center justify-center ">
+<div class="container mx-auto max-w-2xl mt-2 ">
+<div class="flex items-center justify-center overflow-x-auto h-full w-full">
+
           <div class="w-full max-w-md h-auto p-6 bg-white rounded-lg shadow-xl">
                <h1 class="text-4xl font-bold tracking-tight sm:text-6xl text-center my-16 ">Add your task!</h1>
                <form method="POST" action="">
@@ -15,8 +16,13 @@
                               <label for="author" class="block mb-2 text-sm font-medium text-gray-900"> Author</label>
                               <input type="text" name="author" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm" required>
                          </div>
+                         <div class="flex justify-center mt-8">
+                            <button type="submit"
+                                class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-orange-700 rounded-lg">Save
+                                task</button>
+                        </div>
                </form>
           </div>
-          <div></div>
+     </div>
      </div>
      <?php include('partials/footer.phtml') ?>
