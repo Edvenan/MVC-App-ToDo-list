@@ -7,11 +7,41 @@
 class ToDoController extends Controller 
 {
 	
+    ###############################################
+    # HOME:                                       #
+    ###############################################
     // home method that will show main menu
     public function indexAction(){
-        $this->view->message = "TO-DO App - HOME VIEW!!!!";
     }
 
+
+    ################################################
+    # CRUD: CONTROLLER METHODS                     #    
+    ################################################
+
+    // CREATE TASK
+    public function createTaskAction(){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST') &&  (!empty($_POST["name"])) && (!empty($_POST["author"]))) {
+
+            //Recollim les noves dades
+            $name = $_POST['name'];
+            $author = $_POST['author'];
+
+            $todo = $this-> setModel();
+            
+            //Les enviem al model
+            $result = $todo -> createTask($name, $author);
+            
+            if (!$result){
+                throw new Exception($result);
+
+            } else {
+                //Redirigim al llistat total
+                header("Location: showAll");
+            }
+        
+        } 
+    }
     public function showTaskAction(){
 
         if(isset($_GET['id'])) {
@@ -32,9 +62,6 @@ class ToDoController extends Controller
         }
     }
 
-	public function createTaskAction(){
-        $this->view->message = "TO-DO App - CREATE TASK VIEW!!!!";
-    }
 
 	public function deleteTaskAction(){
 
@@ -104,4 +131,23 @@ class ToDoController extends Controller
         
         } 
     }
+    ###############################################
+    # HELPER FUNCTIONS                            #
+    ###############################################
+
+    // helper function
+    public function setModel(): Object {
+        switch ($_SESSION['db_type']){
+
+            case "json":
+                return new ToDoModel_json();
+            case "mysql":
+                return new ToDoModel_mysql();
+            case "mongodb":
+                return new ToDoModel_mongo();
+            default:
+            throw new Exception("Wrong DataBase!");
+        }
+    }
+
 }
