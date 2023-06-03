@@ -59,4 +59,14 @@ class ToDoModel_mongo {
         return true;
     }
 
+    // READ: method that returns an array containing all tasks in MongoDB DataBase
+    public function getTasks(): array | string {
+
+        // MongoDB query
+        $result = $this->_collection->find([]);
+        // Convert result into array
+        $tasks =json_decode(json_encode($result->toArray(),true), true);
+
+        return $tasks;
+    }
 }
