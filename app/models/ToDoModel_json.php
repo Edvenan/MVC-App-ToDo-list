@@ -24,15 +24,15 @@ class ToDoModel_json {
             $new_taskId = 1;
         }
 
-        $task['id'] = $new_taskId;
-        $task['name'] = $name;
-        $task['start_time'] = null;
-        $task['end_time'] = null;
-        $task['author'] = $author;
-        $task['status'] = 'Pending';
+        $new_task['id'] = $new_taskId;
+        $new_task['name'] = $name;
+        $new_task['start_time'] = null;
+        $new_task['end_time'] = null;
+        $new_task['author'] = $author;
+        $new_task['status'] = 'Pending';
 
         // add the new task object to all tasks
-        $tasks[] = $task;
+        $tasks[] = $new_task;
 
         return $this->saveTasks($tasks);
 
@@ -83,7 +83,7 @@ class ToDoModel_json {
         // save all tasks to json
         $result = file_put_contents(ROOT_PATH.'/app/models/data/json/data.json', json_encode($tasks_json, JSON_PRETTY_PRINT));
         if (!$result){
-            return "json uptdate/insert failed";
+            return "json update/insert failed";
         }
         return true;
     }
