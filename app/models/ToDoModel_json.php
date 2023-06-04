@@ -44,6 +44,20 @@ class ToDoModel_json {
         (array) $tasks = json_decode($jsonFile, true);  // returns array of task objects
         return $tasks;
     }
+    
+    // READ: method that gets a task by its 'id' from 'db_type' DataBase 
+    public function getTaskById($id){
+        // missing error handling ****************************
+        // get all tasks
+        $tasks = $this->getTasks();
+
+        foreach($tasks as $task) {
+            if ($task['id'] == $id) {
+              return $task;
+            }
+        }
+        return null;
+    }
 
     // UPDATE: method that updates a task and the array of tasks
     public function updateTask($data, $id){
