@@ -1,8 +1,5 @@
 <?php include('partials/header.phtml') ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +11,17 @@
 </head>
 
 <body class="">
-     <div class="container mx-auto max-w-2xl mt-2">
+     <div class="container mx-auto S max-w-3xl  pt-10 ">
           <div class="flex items-center justify-center h-full w-full">
-               <div class="w-full max-w-md h-auto p-6 overflow-x-auto rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto">
-               <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl   text-center my-14">Add your task!</h1>
+               <div class="w-full  max-w-md h-auto p-6 overflow-x-auto rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
 
+                    <div class="flex justify-center items-center   mt-2 ">
+                         <a href="<?php echo WEB_ROOT; ?>"> <img src="https://www.svgrepo.com/show/11307/task-list.svg" width="100 sm:w-32 md:w-48 lg:w-54" alt="logo"></a>
+                    </div>
+                    <div class="flex justify-center items-center  ">
+                    <h1 class=" font-semibold tracking-light text-4xl sm:text-5xl md:text-6xl text-center my-2 min-w-screen ">Add your task!</h1>
+
+                    </div>
                     <form method="POST" action="">
                          <div class="mb-4">
                               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
@@ -31,7 +34,7 @@
                               <input type="text" name="author" class="w-full px-4 py-2 border lg:border-pink-300 sm:border-gray-300 md:border-blue-300 rounded-lg  text-sm" required>
                          </div>
 
-                         <div class="flex justify-center mt-8">
+                         <div class="flex justify-center mt-6">
                               <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-pink-700 rounded-lg">Save task</button>
                          </div>
                     </form>
