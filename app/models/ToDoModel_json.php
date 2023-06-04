@@ -60,32 +60,28 @@ class ToDoModel_json {
     }
 
     // UPDATE: method that updates a task and the array of tasks
-    public function updateTask($data, $id){
+    public function updateTask(array $data, int $id): bool {
 
         $tasks = $this->getTasks();
 
-        // si ha canviat l'estat a 'finished', posarem 'end_time' a la data/hora del canvi
+        // if status has changed to 'finished', sets 'end_time': current date and time
         if ( $data['status'] == 'Finished' && $tasks[$id]['status'] != 'Finished'){
             $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
         }
-        // si ha canviat l'estat a 'Ongoing' i abans estava a 'finished', posarem 'end_time'en NULL
+        // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] == 'Finished'){
             $tasks[$id]['end_time'] = null;
         }
-        // si ha canviat l'estat a 'Pending' , posarem 'start/end_time' en NULL
+       // if status has changed to 'Pending', sets 'start/end_time': NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] != 'Ongoing'){
             $tasks[$id]['start_time'] = null;
             $tasks[$id]['end_time'] = null;
         }
 
-        // actualitzem les dades amb la informació rebuda
+        // updating task with new data
         $tasks[$id] = array_merge($tasks[$id], $data);
 
-        $this->saveTasks($tasks);
-
-        $result = $this -> saveTasks_json($tasks);
-
-        return $result;
+        return $this -> saveTasks($tasks);
 
     }
 
@@ -102,7 +98,7 @@ class ToDoModel_json {
             $tasks_json[] = $task;
         }
 
-        // save all tasks to json
+        // save all tasks to json - repasar!
         $result = file_put_contents(ROOT_PATH.'/app/models/data/json/data.json', json_encode($tasks_json, JSON_PRETTY_PRINT));
         if (!$result){
             return "json update/insert failed";

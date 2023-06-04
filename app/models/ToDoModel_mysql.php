@@ -24,7 +24,7 @@ class ToDoModel_mysql extends Model{
 
         return $this->save($new_task);
     }
-    
+
     // READ: method that returns an array containing all tasks in MySQL DataBase
     public function getTasks(): array | string {
 
@@ -52,4 +52,31 @@ class ToDoModel_mysql extends Model{
 
         return $task;
     }
+
+    // UPDATE: method that updates a task and saves the changes
+    public function updateTask(array $data, int $id): bool {
+        
+        $original_task = $this->getTaskById($id);
+
+        // if status has changed to 'finished', sets 'end_time': CURRENT DATE AND TIME
+        if ( $data['status'] == 'Finished' && $original_task['status'] != 'Finished'){
+            $original_task['end_time'] = date("Y-m-d H:i:s", time());
+        }
+        // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
+        elseif ( $data['status'] == 'Ongoing' && $original_task['status'] == 'Finished'){
+            $original_task['end_time'] = null;
+        }
+        // if status has changed to 'Pending', sets 'start/end_time': NULL
+        elseif ( $data['status'] == 'Ongoing' && $original_task['status'] != 'Ongoing'){
+            $original_task['start_time'] = null;
+            $original_task['end_time'] = null;
+        }
+
+        // updating task with new data
+        $updated_task = array_merge($original_task, $data);
+
+        return $this->save($updated_task);
+    }
+    
+    
 }
