@@ -37,6 +37,13 @@ class ToDoModel_json {
         return $this->saveTasks($tasks);
 
     }
+    
+    // READ: method that returns an array containing all tasks
+    public function getTasks(): array{
+        (string) $jsonFile = file_get_contents(ROOT_PATH.'/app/models/data/json/data.json');
+        (array) $tasks = json_decode($jsonFile, true);  // returns array of task objects
+        return $tasks;
+    }
 
     // UPDATE: method that updates a task and the array of tasks
     public function updateTask($data, $id){
@@ -49,7 +56,7 @@ class ToDoModel_json {
         }
         // si ha canviat l'estat a 'Ongoing' i abans estava a 'finished', posarem 'end_time'en NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] == 'Finished'){
-            $tasks[$id]['end_time'] = "";
+            $tasks[$id]['end_time'] = null;
         }
         // si ha canviat l'estat a 'Pending' , posarem 'start/end_time' en NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] != 'Ongoing'){
@@ -67,6 +74,7 @@ class ToDoModel_json {
         return $result;
 
     }
+
 
     ###############################################
     # HELPER FUNCTIONS                            #    

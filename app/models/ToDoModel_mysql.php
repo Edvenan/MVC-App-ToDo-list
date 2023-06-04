@@ -25,4 +25,19 @@ class ToDoModel_mysql extends Model{
         return $this->save($new_task);
     }
     
+    // READ: method that returns an array containing all tasks in MySQL DataBase
+    public function getTasks(): array | string {
+
+        // SQL query
+        $sql = 'select * from ' . $this->_table;
+        $statement = $this->_dbh->prepare($sql);
+        $statement->execute();
+        // store all returned rows in array of stdClass objects
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        // Convert stdClass objects to associative arrays
+        $tasks = json_decode(json_encode($result), true);
+        
+        return $tasks;
+    }
 }
