@@ -53,6 +53,7 @@ class ToDoController extends Controller
         $tasks = $todo->getTasks();
         $this->view->tasks = $tasks;
     }
+    
     // READ TASK
     public function showTaskAction(){
 

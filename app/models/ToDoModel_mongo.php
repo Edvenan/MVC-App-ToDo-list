@@ -78,6 +78,7 @@ class ToDoModel_mongo {
         // Convert result into array and return it
         return json_decode(json_encode($result->toArray(),true), true)[0];
     }
+    
     // UPDATE: method that updates a task and saves the changes
     public function updateTask(array $data, int $id): bool {
 
