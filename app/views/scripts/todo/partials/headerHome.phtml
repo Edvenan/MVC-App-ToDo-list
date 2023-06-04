@@ -31,6 +31,12 @@
                         <div class="ml-auto lg:ml-4">
                             <form id="myForm" method="POST" action="showAll" class="flex items-center">
                                 <select name="db_type" data-te-select-init onchange="submitForm()" data-te-select-init class="block py-2 px-3 border border-gray-300 bg-pink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="json" <?php if ($_SESSION['db_type'] == 'json')
+                                                                echo 'selected'; ?>>JSON</option>
+                                    <option value="mysql" <?php if ($_SESSION['db_type'] == 'mysql')
+                                                                echo 'selected'; ?>>MySQL</option>
+                                    <option value="mongodb" <?php if ($_SESSION['db_type'] == 'mongodb')
+                                                                echo 'selected'; ?>>MongoDB</option>
                                  
                                 </select>
                                 <label data-te-select-label-ref class="ml-2">Choose Database Type</label>
