@@ -1,34 +1,48 @@
-<?php include ('partials/header.phtml') ?>
+<?php include('partials/header.phtml') ?>
 
-<div class="grid grid-cols-3 gap-1">
-    <div></div>
-    <div class="self-center">
-          <div class = "text-pink-500 pb-10 pl-20"> ADD A NEW TASK </div>
-          <form method="POST" action="">
-          <div class="pb-5">
-               <label for="name" > Name</label>
-               <input class="pl-5 border-2 border-pink-500" type="text" name="name" value="">
-          </div>
-          <div class="pb-5">
-               <label for="status" > Status </label>
-               <input class="pl-5 border-2 border-pink-500" type="text" name="status" value="" >
-          </div>
-          <div class="pb-5">
-               <label for="start_time" > Start-Time</label>
-               <input class="pl-5 border-2 border-pink-500" type="" name="start_time" value="<?php $fecha = new DateTime(); $fecha->setTimestamp(1171502725);
-               echo $fecha->format('Y-m-d H:i:s') . "\n"; ?>" >
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+</head>
+
+<body class="">
+     <div class="container mx-auto S max-w-3xl  pt-10 ">
+          <div class="flex items-center justify-center h-full w-full">
+               <div class="w-full  max-w-md h-auto p-6 overflow-x-auto rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
+
+                    <div class="flex justify-center items-center   mt-2 ">
+                         <a href="<?php echo WEB_ROOT; ?>"> <img src="https://www.svgrepo.com/show/11307/task-list.svg" width="100 sm:w-32 md:w-48 lg:w-54" alt="logo"></a>
+                    </div>
+                    <div class="flex justify-center items-center  ">
+                    <h1 class=" font-semibold tracking-light text-4xl sm:text-5xl md:text-6xl text-center my-2 min-w-screen ">Add your task!</h1>
+
+                    </div>
+                    <form method="POST" action="">
+                         <div class="mb-4">
+                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                              <input type="text" name="name" class="w-full px-4 py-2 border sm:border-gray-300 
+                              lg:border-pink-300 md:border-blue-300  rounded-lg  text-sm" required>
+                         </div>
+
+                         <div class="mb-4">
+                              <label for="author" class="block mb-2 text-sm font-medium text-gray-900">Author</label>
+                              <input type="text" name="author" class="w-full px-4 py-2 border lg:border-pink-300 sm:border-gray-300 md:border-blue-300 rounded-lg  text-sm" required>
+                         </div>
+
+                         <div class="flex justify-center mt-6">
+                              <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-pink-700 rounded-lg">Save task</button>
+                         </div>
+                    </form>
+               </div>
           </div>
-          <div class="pb-5">
-               <label for="end_time" >End-Time</label>
-               <input class="pl-5 border-2 border-pink-500" type="" name="end_time" value="" >
-          </div>
-          <div class="pb-5">
-               <label for="author" > Author</label>
-               <input class="pl-5 border-2 border-pink-500" type="text" name="author" value="" >
-          </div>
-          </form>
      </div>
-     <div></div>
-</div>
-<?php include ('partials/footer.phtml') ?>
+
+</body>
+
+</html>
+<?php include('partials/footer.phtml') ?>
