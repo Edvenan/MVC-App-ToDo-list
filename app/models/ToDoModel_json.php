@@ -37,6 +37,27 @@ class ToDoModel_json {
         return $this->saveTasks($tasks);
 
     }
+    
+    // READ: method that returns an array containing all tasks
+    public function getTasks(): array{
+        (string) $jsonFile = file_get_contents(ROOT_PATH.'/app/models/data/json/data.json');
+        (array) $tasks = json_decode($jsonFile, true);  // returns array of task objects
+        return $tasks;
+    }
+    
+    // READ: method that gets a task by its 'id' from 'db_type' DataBase 
+    public function getTaskById($id){
+        // missing error handling ****************************
+        // get all tasks
+        $tasks = $this->getTasks();
+
+        foreach($tasks as $task) {
+            if ($task['id'] == $id) {
+              return $task;
+            }
+        }
+        return null;
+    }
 
     // UPDATE: method that updates a task and the array of tasks
     public function updateTask(array $data, int $id): bool {
@@ -49,7 +70,7 @@ class ToDoModel_json {
         }
         // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] == 'Finished'){
-            $tasks[$id]['end_time'] = "";
+            $tasks[$id]['end_time'] = null;
         }
        // if status has changed to 'Pending', sets 'start/end_time': NULL
         elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] != 'Ongoing'){
@@ -63,6 +84,7 @@ class ToDoModel_json {
         return $this -> saveTasks($tasks);
 
     }
+
 
     ###############################################
     # HELPER FUNCTIONS                            #    

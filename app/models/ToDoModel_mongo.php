@@ -59,6 +59,25 @@ class ToDoModel_mongo {
         return true;
     }
 
+    // READ: method that returns an array containing all tasks in MongoDB DataBase
+    public function getTasks(): array | string {
+
+        // MongoDB query
+        $result = $this->_collection->find([]);
+        // Convert result into array
+        $tasks =json_decode(json_encode($result->toArray(),true), true);
+
+        return $tasks;
+    }
+
+    // READ: method that gets a task by its 'id' from MongoDB DataBase
+    public function getTaskById($id){
+        // returns one task by its $id
+        // MongoDB query
+        $result = $this->_collection->find(['id' => (int) $id]);
+        // Convert result into array and return it
+        return json_decode(json_encode($result->toArray(),true), true)[0];
+    }
     // UPDATE: method that updates a task and saves the changes
     public function updateTask(array $data, int $id): bool {
 

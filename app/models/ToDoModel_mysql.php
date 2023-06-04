@@ -50,4 +50,31 @@ class ToDoModel_mysql extends Model{
         return $this->save($updated_task);
     }
     
+    // READ: method that returns an array containing all tasks in MySQL DataBase
+    public function getTasks(): array | string {
+
+        // SQL query
+        $sql = 'select * from ' . $this->_table;
+        $statement = $this->_dbh->prepare($sql);
+        $statement->execute();
+        // store all returned rows in array of stdClass objects
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        // Convert stdClass objects to associative arrays
+        $tasks = json_decode(json_encode($result), true);
+        
+        return $tasks;
+    }
+    
+    // READ: method that gets a task by its 'id' from MySQL DataBase
+    public function getTaskById($id){
+
+        // returns one task by its $id
+        $result = $this->fetchOne($id);
+
+        // Convert stdClass objects to associative arrays
+        $task = json_decode(json_encode($result), true);
+
+        return $task;
+    }
 }

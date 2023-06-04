@@ -42,22 +42,34 @@ class ToDoController extends Controller
         
         } 
     }
+    
+    // READ ALL TASKS
+	public function showAllTasksAction(){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $_SESSION['db_type']= $_POST['db_type'];
+        }
+
+        $todo = $this-> setModel();
+        $tasks = $todo->getTasks();
+        $this->view->tasks = $tasks;
+    }
+    // READ TASK
     public function showTaskAction(){
 
-        if(isset($_GET['id'])) {
-
-            $todo = new ToDoModel();
+        if (isset($_GET['id'])) {
+            
             $taskId = $_GET['id'];
+
+            $todo = $this-> setModel();
+            
             $task = $todo->getTaskById($taskId);
             if(!$task) {
-                echo "Task not found.";
-                exit;
-            } 
-
+                throw new Exception("Task not found.");
+            }  
             $this->view->task = $task;
 
         } else {
-            echo "Sorry, not found.";
+            echo "Not found.";
             exit;
         }
     }
@@ -90,15 +102,6 @@ class ToDoController extends Controller
         $this->view->message = "TO-DO App - SEARCH TASK VIEW!!!!";
     }*/
 
-	public function showAllTasksAction(){
-        $todo = new ToDoModel();
-        $tasks = $todo->getTasks();
-        if(!$tasks) {
-            echo "Tasks not found.";
-            exit;
-        } 
-        $this->view->tasks = $tasks;
-    }
 
     // UPDATE TASK
     public function updateTaskAction(){
