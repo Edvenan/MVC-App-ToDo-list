@@ -59,4 +59,30 @@ class ToDoModel_mongo {
         return true;
     }
 
+    // UPDATE: method that updates a task and saves the changes
+    public function updateTask(array $data, int $id): bool {
+
+        $tasks = $this->getTasks();
+
+        // if status has changed to 'finished', sets 'end_time': current date and time
+        if ( $data['status'] == 'Finished' && $tasks[$id]['status'] != 'Finished'){
+            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+        }
+        // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
+        elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] == 'Finished'){
+            $tasks[$id]['end_time'] = "";
+        }
+        // if status has changed to 'Pending', sets 'start/end_time': NULL
+        elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] != 'Ongoing'){
+            $tasks[$id]['start_time'] = null;
+            $tasks[$id]['end_time'] = null;
+        }
+
+        // updating task with new data
+        $tasks[$id] = array_merge($tasks[$id], $data);
+
+        //return $this -> _collection ->FALTA MÉTODO SAVE MONGO;
+
+    }
+
 }

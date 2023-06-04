@@ -111,21 +111,22 @@ class ToDoController extends Controller
 
                 $taskId = $_GET['id'];
 
-                //Recollim les noves dades
+                // receiving new data
                 $newData['name']   = $_POST['name'];
                 $newData['status'] = $_POST['status'];
                 $newData['author'] = $_POST['author'];
 
-                //Les enviem al model
+                // sending new data to Model 
                 $todo = $this-> setModel();
 
                 $result = $todo -> updateTask($newData, $taskId);
-
+                
+                // receiving results from model
                 if (!$result){
                     throw new Exception("Update failed.");
 
                 } else {
-                    //Redirigim al llistat total
+                    // redirecting to tasks list
                     header("Location: showAll");
                     exit;
                 }
