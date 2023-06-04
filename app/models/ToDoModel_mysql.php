@@ -40,4 +40,16 @@ class ToDoModel_mysql extends Model{
         
         return $tasks;
     }
+    
+    // READ: method that gets a task by its 'id' from MySQL DataBase
+    public function getTaskById($id){
+
+        // returns one task by its $id
+        $result = $this->fetchOne($id);
+
+        // Convert stdClass objects to associative arrays
+        $task = json_decode(json_encode($result), true);
+
+        return $task;
+    }
 }
