@@ -132,28 +132,19 @@ class ToDoController extends Controller
 
             $todo = $this-> setModel();
 
-            $task = $todo->getTaskById($taskId);
+            $result = $todo -> deleteTask($taskId);
 
-            if(!$task) {
-                throw new Exception("Task not found.");
-            }  else {  
+            if (!$result){
+                throw new Exception("Delete failed.");
 
-                $result = $todo -> deleteTask($taskId);
-
-                // receiving results from model
-                if (!$result){
-                    throw new Exception("Delete failed.");
-
-                } else {
-                    // redirecting to tasks list
-                    header("Location: showAll");
-                    exit;
-                }
-        
+            } else {
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
             }
 
         } else {
-            echo "Not found.";
+            throw new Exception("Not found.");
             exit;
         } 
         
