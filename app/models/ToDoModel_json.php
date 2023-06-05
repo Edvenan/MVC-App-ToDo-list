@@ -92,8 +92,14 @@ class ToDoModel_json {
     }
 
     // DELETE: method that deletes a task and updates the array of tasks
-    public function deleteTask(int $id) : bool {
+    public function deleteTask(int $id): bool {
         
+        $task = $this->getTaskById($id);
+
+        if(!$task) {
+            return false;
+        }    
+
         $tasks = $this->getTasks();
 
         unset($tasks[$id]);
