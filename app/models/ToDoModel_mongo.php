@@ -111,4 +111,17 @@ class ToDoModel_mongo {
 
     }
 
+    // DELETE: method that deletes a task from Mongo DataBase
+    public function deleteTask(int $id): bool { 
+
+        $result =  $this->_collection->deleteOne(['id' => $id]); 
+
+        if (!$result->getDeletedCount()) { 
+            return false;   
+        }
+        //repassar?
+        return true;    
+            
+    }
+
 }
