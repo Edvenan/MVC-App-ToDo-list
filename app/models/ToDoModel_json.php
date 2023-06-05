@@ -64,8 +64,12 @@ class ToDoModel_json {
 
         $tasks = $this->getTasks();
 
+        //if status has changed to 'Ongoing' from 'Pending', sets 'start_time': current date and time
+        if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  == 'Pending') {
+            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+        }
         // if status has changed to 'finished', sets 'end_time': current date and time
-        if ( $data['status'] == 'Finished' && $tasks[$id]['status'] != 'Finished'){
+        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] != 'Finished'){
             $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
         }
         // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
@@ -73,7 +77,7 @@ class ToDoModel_json {
             $tasks[$id]['end_time'] = null;
         }
        // if status has changed to 'Pending', sets 'start/end_time': NULL
-        elseif ( $data['status'] == 'Ongoing' && $tasks[$id]['status'] != 'Ongoing'){
+        elseif ( $data['status'] == 'Pending' && $tasks[$id]['status'] != 'Ongoing'){
             $tasks[$id]['start_time'] = null;
             $tasks[$id]['end_time'] = null;
         }

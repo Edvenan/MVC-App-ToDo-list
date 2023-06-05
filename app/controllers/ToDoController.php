@@ -75,30 +75,7 @@ class ToDoController extends Controller
         }
     }
 
-	public function deleteTaskAction(){
-
-        if(isset($_GET['id'])) {
-
-            $todo = new ToDoModel();
-            $taskId = $_GET['id'];
-            $task = $todo->getTaskById($taskId);
-
-            if(!$task) {
-                echo "Task not found.";
-                exit;
-            }  else {  
-                $todo -> deleteTask($taskId);
-            }
-
-            header("Location: showAll");
-
-        } else {
-            echo "Not found.";
-            exit;
-        } 
-        
-    }
-
+	
 	/*public function searchTaskAction(){
         $this->view->message = "TO-DO App - SEARCH TASK VIEW!!!!";
     }*/
