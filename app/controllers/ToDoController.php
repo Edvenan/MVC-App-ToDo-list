@@ -123,6 +123,42 @@ class ToDoController extends Controller
 
     }
 
+    // DELETE TASK
+	public function deleteTaskAction(){
+
+        if(isset($_GET['id'])) {
+
+            $taskId = $_GET['id'];
+
+            $todo = $this-> setModel();
+
+            $task = $todo->getTaskById($taskId);
+
+            if(!$task) {
+                throw new Exception("Task not found.");
+            }  else {  
+
+                $result = $todo -> deleteTask($taskId);
+
+                // receiving results from model
+                if (!$result){
+                    throw new Exception("Delete failed.");
+
+                } else {
+                    // redirecting to tasks list
+                    header("Location: showAll");
+                    exit;
+                }
+        
+            }
+
+        } else {
+            echo "Not found.";
+            exit;
+        } 
+        
+    }
+
     ###############################################
     # HELPER FUNCTIONS                            #
     ###############################################
