@@ -58,22 +58,24 @@ class ToDoModel_mysql extends Model{
         
         $original_task = $this->getTaskById($id);
 
-        //if status has changed to 'Ongoing' from 'Pending', sets 'start_time': current date and time
-        if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  == 'Pending') {
+        //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
+        if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  != 'Ongoing') {
             $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+            $tasks[$id]['end_time'] = null;
         }
-        // if status has changed to 'finished', sets 'end_time': CURRENT DATE AND TIME
-        elseif ( $data['status'] == 'Finished' && $original_task['status'] != 'Finished'){
-            $original_task['end_time'] = date("Y-m-d H:i:s", time());
+        // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
+        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Ongoing'){
+            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
         }
-        // if status has changed to 'Ongoing' from 'finished', sets 'end_time': NULL
-        elseif ( $data['status'] == 'Ongoing' && $original_task['status'] == 'Finished'){
-            $original_task['end_time'] = null;
+        // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
+        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Pending'){
+            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
         }
         // if status has changed to 'Pending', sets 'start/end_time': NULL
-        elseif ( $data['status'] == 'Pending' && $original_task['status'] != 'Ongoing'){
-            $original_task['start_time'] = null;
-            $original_task['end_time'] = null;
+        elseif ( $data['status'] == 'Pending' && $tasks[$id]['status'] != 'Pending'){
+            $tasks[$id]['start_time'] = null;
+            $tasks[$id]['end_time'] = null;
         }
 
         // updating task with new data
