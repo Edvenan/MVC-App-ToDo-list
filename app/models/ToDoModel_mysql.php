@@ -4,7 +4,7 @@
  * ToDo model for the application.
  * Handles access to MySQL Data Base.
  */
-class ToDoModel_mysql extends Model{
+class ToDoModel_mysql extends Model implements ToDoModelInterface {Tod
 
     // set the table we want to look into
     protected $_table = 'tasks';
