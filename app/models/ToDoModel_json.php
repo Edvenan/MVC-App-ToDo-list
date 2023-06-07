@@ -91,15 +91,36 @@ class ToDoModel_json {
 
     }
 
-    // DELETE: method that deletes a task and updates the array of tasks
-    public function deleteTask(int $id) : bool {
-        
+    // DELETE: method that updates a task and the array of tasks
+    public function deleteTask(int $id): bool | string {
+
         $tasks = $this->getTasks();
+        // error handling
+        if((is_string($tasks)) && ($tasks != "DataBase is empty") ){
+            return ("DeleteTask-Model: ".$tasks); // return error msg from getTasks()
+        }
 
-        unset($tasks[$id]);
+        // delete variable
+        if (count($tasks) == 1 && $tasks[0]['id']==$id){
+            $tasks = "";
+        } else {
+            foreach ($tasks as $k => $task){
+                if ($task['id'] == $id) {
+                    unset($tasks[$k]);
+                    break;
+                }
+            }
+        }
 
-        return $this->saveTasks($tasks);
-    } 
+        $result =  $this->saveTasks($tasks);
+        // error handling
+        if(is_string($result)){
+            return ("DeleteTask-Model: ".$result);
+        }
+
+        return true;
+
+    }
 
     ###############################################
     # HELPER FUNCTIONS                            #    
