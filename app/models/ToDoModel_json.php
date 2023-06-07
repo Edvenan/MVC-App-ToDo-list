@@ -34,7 +34,7 @@ class ToDoModel_json {
         // add the new task object to all tasks
         $tasks[] = $new_task;
 
-        $result = return $this->saveTasks($tasks);
+        return $this->saveTasks($tasks);
     }
     
     // READ: method that returns an array containing all tasks
@@ -63,41 +63,42 @@ class ToDoModel_json {
 
         $tasks = $this->getTasks();
 
-        if(!$tasks[$id]) {
-            return "Couldn't find this task in Json files";
-        }
+        foreach($tasks as $i => $task) {
 
-        //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
-        if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  != 'Ongoing') {
-            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-            $tasks[$id]['end_time'] = null;
-        }
-        // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Ongoing'){
-            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Pending'){
-            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Pending', sets 'start/end_time': NULL
-        elseif ( $data['status'] == 'Pending' && $tasks[$id]['status'] != 'Pending'){
-            $tasks[$id]['start_time'] = null;
-            $tasks[$id]['end_time'] = null;
-        }
+            if($task['id'] == $id) {
 
-        // updating task with new data
-        $tasks[$id] = array_merge($tasks[$id], $data);
+                //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
+                if ($data['status'] == 'Ongoing' && $tasks[$i]['status']  != 'Ongoing') {
+                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$id]['end_time'] = null;
+                }
+                // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
+                elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Ongoing'){
+                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                }
+                // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
+                elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Pending'){
+                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                }
+                // if status has changed to 'Pending', sets 'start/end_time': NULL
+                elseif ( $data['status'] == 'Pending' && $tasks[$i]['status'] != 'Pending'){
+                    $tasks[$id]['start_time'] = null;
+                    $tasks[$id]['end_time'] = null;
+                }
+                
+               // updating task with new data
+               $tasks[$i] = array_merge($tasks[$i], $data);
 
-        return $this -> saveTasks($tasks);
-
-        //error handling 
-        if(is_string($result)){
-            return $result;
+               $result = $this -> saveTasks($tasks); 
+            
+               return $result;
+        
+            }
+             
         } 
 
-        return true;
+        return "Couldn't find this task in Json files";
 
     }
 
