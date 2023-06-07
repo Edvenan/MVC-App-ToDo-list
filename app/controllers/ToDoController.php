@@ -103,14 +103,14 @@ class ToDoController extends Controller
                 $result = $todo -> updateTask($newData, $taskId);
                 
                 // receiving results from model
-                if (!$result){
-                    throw new Exception("Update failed.");
+                if (is_string($result)){
+                    throw new Exception($result);
+                } 
 
-                } else {
-                    // redirecting to tasks list
-                    header("Location: showAll");
-                    exit;
-                }
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
+                
 
             } elseif((empty($_POST["name"])) OR (empty($_POST["author"]))) {
 

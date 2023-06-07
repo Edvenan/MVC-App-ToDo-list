@@ -53,35 +53,39 @@ class ToDoModel_mysql extends Model{
         return $task;
     }
 
-    // UPDATE: method that updates a task and saves the changes
-    public function updateTask(array $data, int $id): bool {
+     // UPDATE: method that updates a task in MySQL DataBase
+     public function updateTask($data, $id): bool | string {
         
         $original_task = $this->getTaskById($id);
+        // error handling
+        if (is_string($original_task)){
+            return "UpdateTask-Model: ".$original_task;
+        }
 
-        //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
-        if ($data['status'] == 'Ongoing' && $original_task['status']  != 'Ongoing') {
+        // si ha canviat l'estat a 'finished', posarem 'end_time' a la data/hora del canvi
+        if ( $data['status'] == 'Finished' && $original_task['status'] != 'Finished'){
+            $original_task['end_time'] = date("Y-m-d H:i:s", time());
+        }
+        // si ha canviat l'estat a 'Ongoing' posarem 'start_date' a l'hora del canvi i posarem 'end_time'en NULL
+        elseif ( $data['status'] == 'Ongoing' && $original_task['status'] != 'Ongoing'){
             $original_task['start_time'] = date("Y-m-d H:i:s", time());
             $original_task['end_time'] = null;
         }
-        // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $original_task['status'] == 'Ongoing'){
-            $original_task['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $original_task['status'] == 'Pending'){
-            $original_task['start_time'] = date("Y-m-d H:i:s", time());
-            $original_task['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Pending', sets 'start/end_time': NULL
+        // si ha canviat l'estat a 'Pending' , posarem 'start/end_time' en NULL
         elseif ( $data['status'] == 'Pending' && $original_task['status'] != 'Pending'){
             $original_task['start_time'] = null;
             $original_task['end_time'] = null;
         }
 
-        // updating task with new data
         $updated_task = array_merge($original_task, $data);
 
-        return $this->save($updated_task);
+        $result = $this->save($updated_task);
+        // error handling
+        if(!$result){
+            return ("UpdateTask-Model: Save(): MySQL set failed");
+        }
+        return true;
+ 
     }
     
     // DELETE: method that deletes a task from MySQL DataBase
