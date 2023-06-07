@@ -83,6 +83,11 @@ class ToDoModel_mongo {
     public function updateTask(array $data, int $id): bool {
         
         $original_task = $this->getTaskById($id);
+
+        //error handling
+        if(is_string($original_task)) {
+            return $original_task;
+        }
         
         //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
         if ($data['status'] == 'Ongoing' && $original_task['status'] != 'Ongoing') {
@@ -108,7 +113,21 @@ class ToDoModel_mongo {
         $updated_task = array_merge($original_task, $data);
 
     
-        $result = $this->save($updated_task);
+       // if original task has been modified, we update the doc in the db
+        if ($updated_task != $original_task){
+
+            $result = $this->_collection->updateOne(['id' => (int) $id], [ '$set' => array_slice($updated_task, 2)] );
+
+            if (!$result->getModifiedCount()){
+                return "Update: couldn't save changes in MongoDB.";
+            }
+            
+            return true;
+
+        }else {
+            // no modifications made. Leave without updating db
+            return "Update: no changes found in your request. No updates made in MongoDB.";
+        }
 
     }
 

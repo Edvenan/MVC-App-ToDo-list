@@ -34,8 +34,7 @@ class ToDoModel_json {
         // add the new task object to all tasks
         $tasks[] = $new_task;
 
-        return $this->saveTasks($tasks);
-
+        $result = return $this->saveTasks($tasks);
     }
     
     // READ: method that returns an array containing all tasks
@@ -64,6 +63,10 @@ class ToDoModel_json {
 
         $tasks = $this->getTasks();
 
+        if(!$tasks[$id]) {
+            return "Couldn't find this task in Json files";
+        }
+
         //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
         if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  != 'Ongoing') {
             $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
@@ -88,6 +91,13 @@ class ToDoModel_json {
         $tasks[$id] = array_merge($tasks[$id], $data);
 
         return $this -> saveTasks($tasks);
+
+        //error handling 
+        if(is_string($result)){
+            return $result;
+        } 
+
+        return true;
 
     }
 

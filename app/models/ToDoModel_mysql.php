@@ -58,6 +58,10 @@ class ToDoModel_mysql extends Model{
         
         $original_task = $this->getTaskById($id);
 
+        if(is_string($original_task)) {
+            return $original_task;
+        }
+
         //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
         if ($data['status'] == 'Ongoing' && $original_task['status']  != 'Ongoing') {
             $original_task['start_time'] = date("Y-m-d H:i:s", time());
@@ -81,7 +85,14 @@ class ToDoModel_mysql extends Model{
         // updating task with new data
         $updated_task = array_merge($original_task, $data);
 
-        return $this->save($updated_task);
+        $result = return $this->save($updated_task);
+
+        //error handling 
+        if(!$result) {
+            return "Update: couldn't save changes in MySql Data Base";
+        } 
+
+        return true;
     }
     
     
