@@ -88,5 +88,17 @@ class ToDoModel_mysql extends Model{
  
     }
     
+    // DELETE: method that deletes a task from MySQL DataBase
+    public function deleteTask(int $id): bool {
+
+        $task = $this -> getTaskById($id);
+
+        if(!$task) {
+            return false;  
+        }  
+
+        return $this->delete($id);
+
+    } 
     
 }

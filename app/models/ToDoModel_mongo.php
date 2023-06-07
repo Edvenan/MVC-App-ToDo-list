@@ -133,4 +133,23 @@ class ToDoModel_mongo {
             return "UpdateTask-Model: no changes found in your request. No updates made in MongoDB.";
         }
     }
+
+
+    // DELETE: method that deletes a task from Mongo DataBase
+    public function deleteTask(int $id): bool {
+
+        $task = $this -> getTaskById($id);
+
+        if(!$task) {
+            return false;  
+        } 
+
+        $result =  $this->_collection->deleteOne(['id' => $id]); 
+
+        if (!$result->getDeletedCount()) { 
+            return false;   
+        }
+        
+        return true;      
+    }
 }

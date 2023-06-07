@@ -1,11 +1,63 @@
-<?php include ('partials/header.phtml') ?>
-<?php include ('../app/views/layouts/background.phtml') ?>
+<!-- Your header content here -->
+
+<?php include ('partials/headerHome.phtml') ?>   
+
+<!---------------------------------------> 
+<body>
 
 
-    
-    <h1>
-        <?php //echo $this->message ?>
-    </h1>
+<div
+  id="carouselExampleSlidesOnly"
+  class="relative table-container"
+
+  data-te-carousel-init
+  data-te-carousel-slide>
+  <!--Carousel items-->
+  <div class="relative  w-full overflow-hidden after:clear-both after:block after:content-['']">
+    <!--First item-->
+    <div
+      class="relative float-left -mr-[100%] w-full overflow-hidden transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
+      data-te-carousel-item
+      data-te-carousel-active>
+      <img
+        src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto4.jpg" ?>" class="block w-full"  alt="Wild Landscape" />
+    </div>
+    <!--Second item-->
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+        data-te-carousel-item>
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto1.jpg" ?>" class="block w-full" alt="Camera" />
+    </div>
+    <!--Third item-->
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+        data-te-carousel-item>
+        <img src="<?php echo WEB_ROOT . "/images//fotosTeamDevelop/foto2.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+    </div>
+    <!--Fourth item-->
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+        data-te-carousel-item>
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto3.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+    </div>
+    <!--Fifth item-->
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+        data-te-carousel-item>
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto4.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+    </div>
+    <!--Sixth item-->
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+        data-te-carousel-item>
+        <img src="<?php echo WEB_ROOT . "//images/fotosTeamDevelop/foto7.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+    </div>
+ </div>
+</div>
 
 
+<!--------------------------------------->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+</body>
+
+<!-- Your footer content here -->
 <?php include ('partials/footer.phtml') ?>
