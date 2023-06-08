@@ -46,15 +46,27 @@
                     <th scope="col" class="px-2 py-3 text-left text-white">
 
 </th>
+</tr>
+</thead>
         
             <tbody>
-                <?php foreach($this->tasks as $task): ?>
-                <tr>
-                    <td class="pb-5 pr-3">  <?php echo $task['name']?> </td>
-                    <td class="pb-5 pr-3"> <?php echo $task['status'] ?> </td>
-                    <td class="pb-5 pr-3"> <?php echo $task['start_time'] ?> </td>
-                    <td class="pb-5 pr-3"> <?php echo $task['end_time']?> </td>
-                    <td class="pb-5 pr-3"> <?php echo $task['author'] ?> </td>
+            <?php foreach ($this->tasks as $task) : ?>
+                    <tr class="bg-white border lg:border-pink-700 md:md:boder-blue-700 ">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            <?php echo $task['name']; ?>
+                        </td>
+                        <td class="px-6 py-4 text-left">
+                            <?php echo $task['status']; ?>
+                        </td>
+                        <td class="px-6 py-4 text-left">
+                            <?php echo $task['start_time']; ?>
+                        </td>
+                        <td class="px-6 py-4 text-left">
+                            <?php echo $task['end_time']; ?>
+                        </td>
+                        <td class=" py-4 text-left">
+                            <?php echo $task['author']; ?>
+                        </td>
                     <td class="pb-5 pr-3"> 
                       <a href = "showTask?id=<?php echo $task['id']?>">View</a>  
                      <a href = "update?id=<?php echo $task['id']?>">Update </a>
