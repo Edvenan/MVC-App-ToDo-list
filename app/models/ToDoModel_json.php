@@ -4,7 +4,7 @@
  * ToDo model for the application.
  * Handles access to JSON Data Base.
  */
-class ToDoModel_json implements ToDoModelInterface {
+class ToDoModel_json {
 
     ################################################
     # CRUD: CLASS METHODS TO OPERATE WITH DATABASE #    
