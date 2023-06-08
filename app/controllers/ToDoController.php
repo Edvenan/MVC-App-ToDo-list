@@ -23,23 +23,22 @@ class ToDoController extends Controller
     public function createTaskAction(){
         if (($_SERVER['REQUEST_METHOD'] == 'POST') &&  (!empty($_POST["name"])) && (!empty($_POST["author"]))) {
 
-            //Recollim les noves dades
+            //Get new data from user
             $name = $_POST['name'];
             $author = $_POST['author'];
 
             $todo = $this-> setModel();
             
-            //Les enviem al model
+            //Snd them to model to create task
             $result = $todo -> createTask($name, $author);
             
-            if (!$result){
-                throw new Exception($result);
+            if (is_string($result)){
+                throw new Exception("CreateTask: ".$result);
 
             } else {
-                //Redirigim al llistat total
-                header("Location: showAll");
+                // Task created successfully
+                $this->print_success_msg("Task created successfully!");
             }
-        
         } 
     }
     
@@ -167,6 +166,13 @@ class ToDoController extends Controller
             default:
             throw new Exception("Wrong DataBase!");
         }
+    }
+
+        
+    // helper function to print success messages
+    public function print_success_msg(string $msg) {
+        $this->view->ok_msg = $msg;
+        include (ROOT_PATH."/app/views/scripts/ok/ok.phtml");
     }
 
 }

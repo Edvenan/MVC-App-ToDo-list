@@ -4,7 +4,12 @@
  * ToDo model for the application.
  * Handles access to JSON Data Base.
  */
-class ToDoModel_json {
+
+class ToDoModel_json implements ToDoModelInterface{
+
+    // set the json file we want to look into
+    protected $json_file = ROOT_PATH.'/app/models/data/json/data.json';
+
 
     ################################################
     # CRUD: CLASS METHODS TO OPERATE WITH DATABASE #    
@@ -15,13 +20,20 @@ class ToDoModel_json {
 
         // get all tasks
         $tasks = $this->getTasks();
-        
-        // check if len of tasks > 0. else new taskId = 1
-        if (count($tasks) >0) {
+        // error handling
+        if( (is_string($tasks)) && ($tasks != "json DataBase is empty") ){
+            return ("CreateTask-Model: ".$tasks); // return error msg from getTasks()
+        }
+
+        if (is_string($tasks)) {
+            // if tasks is a string (DataBase is empty),
+            // new taskId = 1
+            $new_taskId = 1;
+            // initialise $tasks array
+            $tasks = [];
+        } else {
             // new taskId =  last taskId + 1
             $new_taskId = end($tasks)['id'] + 1;
-        } else {
-            $new_taskId = 1;
         }
 
         $new_task['id'] = $new_taskId;
@@ -34,7 +46,13 @@ class ToDoModel_json {
         // add the new task object to all tasks
         $tasks[] = $new_task;
 
-        return $this->saveTasks($tasks);
+        $result = $this->saveTasks($tasks);
+        // error handling
+        if(is_string($result)){
+            return ("CreateTask-Model: ".$result);
+        }
+
+        return true;
     }
     
     // READ: method that returns an array containing all tasks
