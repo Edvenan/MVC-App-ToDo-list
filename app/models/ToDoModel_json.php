@@ -35,7 +35,6 @@ class ToDoModel_json implements ToDoModelInterface {
         $tasks[] = $new_task;
 
         return $this->saveTasks($tasks);
-
     }
     
     // READ: method that returns an array containing all tasks
@@ -64,48 +63,75 @@ class ToDoModel_json implements ToDoModelInterface {
 
         $tasks = $this->getTasks();
 
-        //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
-        if ($data['status'] == 'Ongoing' && $tasks[$id]['status']  != 'Ongoing') {
-            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-            $tasks[$id]['end_time'] = null;
-        }
-        // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Ongoing'){
-            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
-        elseif ( $data['status'] == 'Finished' && $tasks[$id]['status'] == 'Pending'){
-            $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-            $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
-        }
-        // if status has changed to 'Pending', sets 'start/end_time': NULL
-        elseif ( $data['status'] == 'Pending' && $tasks[$id]['status'] != 'Pending'){
-            $tasks[$id]['start_time'] = null;
-            $tasks[$id]['end_time'] = null;
-        }
+        foreach($tasks as $i => $task) {
 
-        // updating task with new data
-        $tasks[$id] = array_merge($tasks[$id], $data);
+            if($task['id'] == $id) {
 
-        return $this -> saveTasks($tasks);
+                //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
+                if ($data['status'] == 'Ongoing' && $tasks[$i]['status']  != 'Ongoing') {
+                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$id]['end_time'] = null;
+                }
+                // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
+                elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Ongoing'){
+                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                }
+                // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
+                elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Pending'){
+                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                }
+                // if status has changed to 'Pending', sets 'start/end_time': NULL
+                elseif ( $data['status'] == 'Pending' && $tasks[$i]['status'] != 'Pending'){
+                    $tasks[$id]['start_time'] = null;
+                    $tasks[$id]['end_time'] = null;
+                }
+                
+               // updating task with new data
+               $tasks[$i] = array_merge($tasks[$i], $data);
+
+               $result = $this -> saveTasks($tasks); 
+            
+               return $result;
+        
+            }
+             
+        } 
+
+        return "Couldn't find this task in Json files";
 
     }
 
-    // DELETE: method that deletes a task and updates the array of tasks
-    public function deleteTask(int $id): bool {
+    // DELETE: method that deletes a task from the DataBase
+    public function deleteTask(int $id): bool | string {
         
-        $task = $this->getTaskById($id);
-
-        if(!$task) {
-            return false;
-        }    
-
         $tasks = $this->getTasks();
+        // error handling
+        if((is_string($tasks)) && ($tasks != "DataBase is empty") ){
+            return ("DeleteTask-Model: ".$tasks); // return error msg from getTasks()
+        }
 
-        unset($tasks[$id]);
+        // delete variable
+        if (count($tasks) == 1 && $tasks[0]['id']==$id){
+            $tasks = "";
+        } else {
+            foreach ($tasks as $k => $task){
+                if ($task['id'] == $id) {
+                    unset($tasks[$k]);
+                    break;
+                }
+            }
+        }
 
-        return $this->saveTasks($tasks);
-    } 
+        $result =  $this->saveTasks($tasks);
+        // error handling
+        if(is_string($result)){
+            return ("DeleteTask-Model: ".$result);
+        }
+
+        return true;
+
+    }
 
     ###############################################
     # HELPER FUNCTIONS                            #    
