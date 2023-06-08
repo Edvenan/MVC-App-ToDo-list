@@ -1,18 +1,51 @@
-<?php include ('partials/header.phtml') ?>   
-    <div class="grid grid-cols-3 gap-1">
-      <div></div>
-      <div>
-        <table class = "text-sm table_auto">
-            <thead>
+<?php include(__DIR__ . '/partials/header.phtml'); ?>
+<?php $task = $this->content; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <title>TodoApp</title>
+</head>
+
+<body class="bg-grey-400"> <!-- bg-gradient-to-r from-blue-500 to-purple-500-->
+
+  
+<div class="overflow-x-auto mt-16">
+        <table class="w-full text-sm text-left text-gray-500 mb-16 ">
+       
+        <thead class="text-xs text-gray-700 uppercase lg:shadow-pink-700 bg-pink-700 sm:bg-gray-700 md:bg-blue-700 lg:bg-pink-700 sticky top-0 ">
                 <tr>
-                    <th class="pr-2 pb-5">Task</th>
-                    <th class="pr-2 pb-5">Status</th>
-                    <th class="pr-2 pb-5">Start-time</th>
-                    <th class="pr-2 pb-5">End-time</th>
-                    <th class="pr-2 pb-5">Author</th>
-                    <th class="pr-2 pb-5">Actions</th>
-                </tr>
-            </thead>
+                    <th scope="col" class="px-6 py-3 text-left text-white">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-white">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-white">
+                        Start time
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-white">
+                        End time
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-white">
+                        Author
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left text-white">
+
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left text-white">
+
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-left text-white">
+
+</th>
         
             <tbody>
                 <?php foreach($this->tasks as $task): ?>
@@ -34,4 +67,9 @@
         </div>
         <div></div>
     </div> 
+
+
+</body>
+
+</html>
 <?php include ('partials/footer.phtml') ?>
