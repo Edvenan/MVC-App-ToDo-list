@@ -38,20 +38,33 @@ class ToDoModel_mysql extends Model{
         $sql = 'select * from ' . $this->_table;
         $statement = $this->_dbh->prepare($sql);
         $statement->execute();
+        //error handling
+        if (!$statement){
+            return ("GetTasks-Model: MySQL DataBase not reachable.");
+        }
+
         // store all returned rows in array of stdClass objects
         $result = $statement->fetchAll(PDO::FETCH_OBJ);
+        //error handling
+        if (!$result){
+            return ("GetTasks-Model: MySQL DataBase is empty");
+        }
 
         // Convert stdClass objects to associative arrays
         $tasks = json_decode(json_encode($result), true);
         
         return $tasks;
     }
-    
+
     // READ: method that gets a task by its 'id' from MySQL DataBase
-    public function getTaskById($id){
+    public function getTaskById($id): array | string {
 
         // returns one task by its $id
         $result = $this->fetchOne($id);
+        // error handling
+        if (!$result){
+            return "GetTaskById-Model: id not found in MySQL DataBase.";
+        }
 
         // Convert stdClass objects to associative arrays
         $task = json_decode(json_encode($result), true);

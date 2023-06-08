@@ -80,19 +80,50 @@ class ToDoModel_mongo {
 
         // MongoDB query
         $result = $this->_collection->find([]);
-        // Convert result into array
-        $tasks =json_decode(json_encode($result->toArray(),true), true);
 
-        return $tasks;
+        // error handling
+        if ($result instanceof MongoDB\Driver\Cursor) {
+            // Query executed successfully
+            
+            // Check if any documents were found
+            if ($result->isDead()) {
+                // No documents found
+                return "GetTasks-Model: MongoDB is empty";
+            } else {
+                // Documents found
+                // Convert result into array
+                $tasks =json_decode(json_encode($result->toArray(),true), true);
+                return $tasks;
+            }
+        } else {
+            // Query execution failed
+            return "GetTasks-Model: MongoDB not reachable.";
+        }
     }
 
     // READ: method that gets a task by its 'id' from MongoDB DataBase
-    public function getTaskById($id){
+    public function getTaskById(int $id): array | string {
         // returns one task by its $id
         // MongoDB query
         $result = $this->_collection->find(['id' => (int) $id]);
-        // Convert result into array and return it
-        return json_decode(json_encode($result->toArray(),true), true)[0];
+        
+        // error handling
+        if ($result instanceof MongoDB\Driver\Cursor) {
+            // Query executed successfully
+            
+            // Check if document was found
+            if ($result->isDead()) {
+                // No document found
+                return "GetTaskById-Model: 'id' not found in MongoDB.";
+            } else {
+                // Document found
+                // Convert result into array and return it
+                return json_decode(json_encode($result->toArray(),true), true)[0];
+            }
+        } else {
+            // Query execution failed
+            return "GetTaskById-Model: MongoDB not reachable.";
+        }
     }
     
     // UPDATE: method that updates a task in MongoDB DataBase
