@@ -37,30 +37,30 @@
                             <span class="self-center text-2xl font-semibold hover:text-blue-200 whitespace-nowrap text-white text-center justify-center ml-4">TODO</span>
                         </a>
 
-                        <ul class="flex flex-wrap  sm:justify-center md:flex-nowrap lg:flex-wrap sm:justify-center   uppercase px-2 mx-auto font-semibold font-heading space-x-4 sm:space-x-6 md:space-x-10 lg:space-x-12 sm:items-center">
-                            <li class="text-center lg:mr-14 flex-grow justify-center ">
-                                <a class="sm:text-base hover:text-blue-200 " href="create">Add New Task</a>
+                        <ul class="flex flex-wrap sm:justify-center md:flex-nowrap lg:flex-wrap  uppercase px-2 mx-auto font-semibold font-heading space-x-4 sm:space-x-6 md:space-x-10 lg:space-x-12 sm:items-center">
+                            <li class="text-center lg:mr-14 flex-grow justify-center">
+                                <a class="text-base md:text-base sm:text-sm lg:text-lg hover:text-blue-200 py-2 px-4 rounded bg-blue-500 text-white hover:bg-blue-600" href="create">Add New Task</a>
                             </li>
                             <li class="text-center flex-grow justify-center">
-                                <a class="sm:text-base hover:text-blue-200 " href="showAll">Show all Tasks</a>
+                                <a class="text-base md:text-base sm:text-sm lg:text-lg hover:text-blue-200 py-2 px-4 rounded bg-blue-500 text-white hover:bg-blue-600" href="showAll">Show all Tasks</a>
                             </li>
                         </ul>
-                        <form class="flex flex-wrap justify-center items-center ml-auto lg:ml-4" id="myForm" method="POST" action="showAll">
-                            <label data-te-select-label-ref style="color:white;">Choose D.B Type</label>
+                        <form class="flex flex-col justify-center items-center ml-auto sm:flex-nowrap md:justify-end lg:justify-center xl:justify-center md:mt-4 lg:ml-4" id="myForm" method="POST" action="showAll">
+                            <label data-te-select-label-ref style="color:white;" >Database type</label>
                             <select name="db_type" data-te-select-init onchange="submitForm()">
 
-                                <option value="json" data-te-select-icon="https://cdn.iconscout.com/icon/free/png-512/free-json-file-1-504451.png?f=avif&w=256" <?php if ($_SESSION['db_type'] == 'json')
-                                                                                                                                                                    echo 'selected'; ?>>JSON</option>
-                                <option value="mysql" data-te-select-icon="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_mysql_icon_130379.png" <?php if ($_SESSION['db_type'] == 'mysql')
-                                                                                                                                                                echo 'selected'; ?>>MySQL</option>
-                                <option value="mongodb" data-te-select-icon="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_logo_icon_146424.png" <?php if ($_SESSION['db_type'] == 'mongodb')
-                                                                                                                                                                        echo 'selected'; ?>>MongoDB</option>
-                            </select>
-                            <script>
-                                function submitForm() {
-                                    document.getElementById('myForm').submit();
-                                }
-                            </script>
+<option value="json" data-te-select-icon="https://cdn.iconscout.com/icon/free/png-512/free-json-file-1-504451.png?f=avif&w=256" <?php if ($_SESSION['db_type'] == 'json')
+                                                                                                                                    echo 'selected'; ?>>JSON</option>
+<option value="mysql" data-te-select-icon="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_mysql_icon_130379.png" <?php if ($_SESSION['db_type'] == 'mysql')
+                                                                                                                                echo 'selected'; ?>>MySQL</option>
+<option value="mongodb" data-te-select-icon="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_logo_icon_146424.png" <?php if ($_SESSION['db_type'] == 'mongodb')
+                                                                                                                                        echo 'selected'; ?>>MongoDB</option>
+</select>
+<script>
+function submitForm() {
+    document.getElementById('myForm').submit();
+}
+</script>
                         </form>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
         </div>
 
     </header>
-   
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 
 </body>
 
