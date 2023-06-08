@@ -7,7 +7,7 @@ require VENDOR_PATH.'autoload.php';
  * ToDo model for the application.
  * Handles access to MongoDB Data Base.
  */
-class ToDoModel_mongo {
+class ToDoModel_mongo implements ToDoModelInterface {
 
     protected $_dbh = null;
     protected $_collection = "";
