@@ -22,7 +22,13 @@ class ToDoModel_mysql extends Model implements ToDoModelInterface {
         $new_task['author'] = $author;
         $new_task['status'] = 'Pending';
 
-        return $this->save($new_task);
+        $result = $this->save($new_task);
+        // error handling
+        if(!$result){
+            return ("CreateTask-Model: Save(): MySQL insert failed");
+        }
+
+        return true;
     }
 
     // READ: method that returns an array containing all tasks in MySQL DataBase

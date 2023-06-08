@@ -31,8 +31,12 @@ class ToDoModel_mongo implements ToDoModelInterface {
     // CREATE: method that creates a task and adds it to the MongoDB DataBase
     public function createTask(string $name, string $author): bool | string {
 
-        // get all tasks
+        // get all tasks to find highest 'id'
         $tasks = $this->getTasks();
+        // error handling
+        if(is_string($tasks)){
+            return ("CreateTask-Model: ".$tasks); // return error msg from getTasks()
+        }
 
         // get highest id in DB to determine new id
         $highestId = -1; // Initialize with a value lower than any possible id
@@ -53,10 +57,22 @@ class ToDoModel_mongo implements ToDoModelInterface {
 
         $result = $this->_collection->insertOne( $new_task );
 
-        if (!$result->getInsertedCount()){
-            return "MongoDB insert failed";
+        // error handling
+        if ($result instanceof MongoDB\InsertOneResult) {
+            // Query executed successfully
+            
+            // Check if any documents were inserted
+            if (!$result->getInsertedCount()) {
+                // No documents inserted
+                return "CreateTask-Model: MongoDB insert failed.";
+            } else {
+                // Document inserted
+                return true;
+            }
+        } else {
+            // Query execution failed
+            return "CreateTask-Model: MongoDB not reachable.";
         }
-        return true;
     }
 
     // READ: method that returns an array containing all tasks in MongoDB DataBase
