@@ -95,9 +95,14 @@ class ToDoModel_json implements ToDoModelInterface{
     }
 
     // UPDATE: method that updates a task and the array of tasks
-    public function updateTask(array $data, int $id): bool {
+    public function updateTask(array $data, int $id): bool | string {
 
         $tasks = $this->getTasks();
+        // error handling
+        if( (is_string($tasks)) ){
+            return ("UpdateTask-Model: ".$tasks); // return error msg from getTasks()
+        }
+
 
         foreach($tasks as $i => $task) {
 
@@ -105,37 +110,44 @@ class ToDoModel_json implements ToDoModelInterface{
 
                 //if status has changed to 'Ongoing', sets 'start_time': current date and time & 'end_time': NULL
                 if ($data['status'] == 'Ongoing' && $tasks[$i]['status']  != 'Ongoing') {
-                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-                    $tasks[$id]['end_time'] = null;
+                    $tasks[$i]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$i]['end_time'] = null;
                 }
                 // if status has changed to 'Finished' from 'Ongoing', sets 'end_time': current date and time
                 elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Ongoing'){
-                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$i]['end_time'] = date("Y-m-d H:i:s", time());
                 }
                 // if status has changed to 'Finished' from 'Pending', sets 'start/end_time': current date and time
                 elseif ( $data['status'] == 'Finished' && $tasks[$i]['status'] == 'Pending'){
-                    $tasks[$id]['start_time'] = date("Y-m-d H:i:s", time());
-                    $tasks[$id]['end_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$i]['start_time'] = date("Y-m-d H:i:s", time());
+                    $tasks[$i]['end_time'] = date("Y-m-d H:i:s", time());
                 }
                 // if status has changed to 'Pending', sets 'start/end_time': NULL
                 elseif ( $data['status'] == 'Pending' && $tasks[$i]['status'] != 'Pending'){
-                    $tasks[$id]['start_time'] = null;
-                    $tasks[$id]['end_time'] = null;
+                    $tasks[$i]['start_time'] = null;
+                    $tasks[$i]['end_time'] = null;
                 }
-                
+               
+                if ($tasks[$i] == array_merge($tasks[$i], $data)){
+                    // no modifications made. Leave without updating db
+                    return "UpdateTask-Model: no changes found in your request. No update made into json DataBase.";
+                } 
+
+
                // updating task with new data
                $tasks[$i] = array_merge($tasks[$i], $data);
 
                $result = $this -> saveTasks($tasks); 
-            
-               return $result;
+                // error handling
+                if(is_string($result)){
+                    return ("UpdateTask-Model: ".$result);
+                }
+                return $result;
         
             }
              
         } 
-
-        return "Couldn't find this task in Json files";
-
+        return "UpdateTask-Model: Couldn't find this task in Json files";
     }
 
     // DELETE: method that deletes a task from the DataBase
