@@ -11,44 +11,36 @@
      <title>Document</title>
 </head>
 
-<body class="">
-     <div class="container mx-auto S max-w-3xl  pt-10 ">
-          <div class="flex items-center justify-center h-full w-full">
-               <div class="w-full  max-w-md h-auto p-6 overflow-x-auto rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 ">
+<body class="pt-24 sm:pt-20 lg:pt-165 justify-end">
 
-                    <div class="flex justify-center items-center   mt-2 ">
-                         <a href="<?php echo WEB_ROOT; ?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" id="list" class="h-16 ">
-                                   <circle cx="5" cy="5.5" r="2.5" stroke="white"></circle>
-                                   <path fill="red" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M12.5 6h14"></path>
-                                   <circle cx="5" cy="14.5" r="2.5" stroke="white"></circle>
-                                   <path fill="green" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M12.5 15h14"></path>
-                                   <circle cx="5" cy="23.5" r="2.5" stroke="white"></circle>
-                                   <path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M12.5 24h14"></path>
-                              </svg></a>
-                    </div>
-                    <div class="flex justify-center items-center  ">
-                         <h1 class=" font-semibold tracking-light text-4xl sm:text-5xl md:text-6xl text-center my-2 min-w-screen ">Add your task!</h1>
+<div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
+     <div class="flex items-center justify-center">
+          <div class="w-full max-w-xs p-5 sm:p-10 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
 
-                    </div>
-                    <form method="POST" action="">
-                         <div class="mb-4">
-                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                              <input type="text" name="name" class="w-full px-4 py-2 border sm:border-gray-300 
-                              lg:border-pink-300 md:border-blue-300  rounded-lg  text-sm" required>
-                         </div>
-
-                         <div class="mb-4">
-                              <label for="author" class="block mb-2 text-sm font-medium text-gray-900">Author</label>
-                              <input type="text" name="author" class="w-full px-4 py-2 border lg:border-pink-300 sm:border-gray-300 md:border-blue-300 rounded-lg  text-sm" required>
-                         </div>
-
-                         <div class="flex justify-center mt-6">
-                              <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-pink-700 rounded-lg">Save task</button>
-                         </div>
-                    </form>
+               <div class="flex justify-center items-center">
+                    <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Add your task!</h1>
                </div>
+
+               <form method="POST" action="">
+                    <div class="mb-3 sm:mb-4">
+                         <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
+                         <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" required>
+                    </div>
+
+                    <div class="mb-3 sm:mb-4">
+                         <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
+                         <input type="text" name="author" class="w-full px-3 py-2 border lg:border-pink-300 sm:border-gray-300 md:border-blue-300 rounded-lg text-sm" required>
+                    </div>
+
+                    <div class="flex justify-center mt-4 sm:mt-6">
+                         <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-pink-700 rounded-lg">Save task</button>
+                    </div>
+               </form>
           </div>
      </div>
+</div>
+
+</body>
 
 </body>
 
