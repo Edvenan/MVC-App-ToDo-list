@@ -36,8 +36,9 @@ class ToDoController extends Controller
                 throw new Exception("CreateTask: ".$result);
 
             } else {
-                // Task created successfully
-                $this->print_success_msg("Task created successfully!");
+                // redirect to tasks list
+                header("Location:showAll");
+                exit;
             }
         } 
     }
@@ -145,7 +146,6 @@ class ToDoController extends Controller
 
         } else {
             throw new Exception("Not found.");
-            exit;
         } 
         
     }
@@ -167,13 +167,6 @@ class ToDoController extends Controller
             default:
             throw new Exception("Wrong DataBase!");
         }
-    }
-
-        
-    // helper function to print success messages
-    public function print_success_msg(string $msg) {
-        $this->view->ok_msg = $msg;
-        include (ROOT_PATH."/app/views/scripts/ok/ok.phtml");
     }
 
 }
