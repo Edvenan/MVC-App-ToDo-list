@@ -1,41 +1,55 @@
 <?php include('partials/header.phtml') ?>
 
+<body>
+
+<div class="overflow-x-auto  mt-14 ">
+<!-- Table -->
+<table class="w-full text-sm text-left text-gray-500 mb-16 ">
+
+<thead class="text-xs text-gray-700 uppercase lg:shadow-pink-700 bg-pink-700 sm:bg-gray-700 md:bg-blue-700 lg:bg-pink-700 mx-auto">
+    <tr>
+        <th scope="col" class="px-6 py-3 text-left text-white">
+            Name
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-white">
+            Author
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-white">
+            Start 
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-white">
+            End 
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-white">
+            Author
+        </th>
+       
 
 
-<div class="overflow-x-auto max-w-full ">
+    </tr>
+</thead>
+        <tbody>
+        <tr class="bg-white border md:border-pink-700 sm:border-blue-700">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <?php echo $this->task['name']; ?>  
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <?php echo $this->task['author']; ?>  
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <?php echo $this->task['start_time']; ?>  
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <?php echo $this->task['end_time']; ?>  
+                        </td>
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <?php echo $this->task['status'];?>
+                        </td>   
 
-    <div class="pl-20 pb-5 text-xl"> TASK VIEW</div>
-    <table class="w-full text-md text-center text-gray-500 mb-6">
-        <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-900 md:bg-pink-700 sm:bg-blue-700">
-            <tr>
-                <th scope="col" class="p-6 py-3 text-black">
-                    Task</th>
-                <!--  <td class="p-2"><?php echo $this->task['name']; ?> </td>-->
-            </tr>
-            <tr>
-                <th scope="col" class="p-6 py-3 text-black">
-                    Author</th>
-                <!--  <td class="p-2"><?php echo $this->task['author']; ?></td>-->
-            </tr>
-            <tr>
-                <th scope="col" class="p-6 py-3 text-black">
-                    Start</th>
-
-            </tr>
-            <tr>
-            <th scope="col" class="p-6 py-3 text-black"> 
- End </th>
-
-            </tr>
-            <tr>
-                <th scope="col" class="p-6 py-3 text-black">
-                    Status </th>
-             <!--   <td class="p-2"><?php echo $this->task['status']; ?> </td> -->
-            </tr>
-        </thead>>
+        </tbody>
     </table>
 
 </div>
-<div></div>
-</div>
+
+</body>
 <?php include('partials/footer.phtml') ?>
