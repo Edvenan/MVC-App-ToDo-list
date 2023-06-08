@@ -1,11 +1,12 @@
 <?php include ('partials/header.phtml') ?>
 
    
-<div class="grid grid-cols-3 gap-1">
-   <div></div>
-   <div>
+
+<div class="overflow-x-auto max-w-full "> 
+ 
      <div class="pl-20 pb-5 text-xl"> TASK VIEW</div>
-     <table>
+     <table class="w-full text-md text-center text-gray-500 mb-6">
+     <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-900 md:bg-pink-700 sm:bg-blue-700">
         <tr> 
             <th class="p-2"> Task</th>
             <td class="p-2"><?php echo $this->task['name'];?> </td>
@@ -26,7 +27,7 @@
             <th class="p-2"> Status </th>
             <td class="p-2"><?php echo $this->task['status'];?> </td>
         </tr>
-
+     </thead>>
      </table>
 
    </div>
