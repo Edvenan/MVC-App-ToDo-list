@@ -1,55 +1,41 @@
 <?php include('partials/header.phtml') ?>
+<body class="pt-24 sm:pt-14 lg:pt-8 justify-end">
 
-<body>
+        <div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
+            <div class="flex items-center justify-center">
+                <div class="w-full max-w-xs p-5 sm:p-18 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
 
-<div class="overflow-x-auto  mt-14 ">
-<!-- Table -->
-<table class="w-full text-sm text-left text-gray-500 mb-16 ">
+                    <div class="flex justify-center items-center">
+                        <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Task view!</h1>
+                    </div>
 
-<thead class="text-xs text-gray-700 uppercase lg:shadow-pink-700 bg-pink-700 sm:bg-gray-700 md:bg-blue-700 lg:bg-pink-700 mx-auto">
-    <tr>
-        <th scope="col" class="px-6 py-3 text-left text-white">
-            Name
-        </th>
-        <th scope="col" class="px-6 py-3 text-left text-white">
-            Author
-        </th>
-        <th scope="col" class="px-6 py-3 text-left text-white">
-            Start 
-        </th>
-        <th scope="col" class="px-6 py-3 text-left text-white">
-            End 
-        </th>
-        <th scope="col" class="px-6 py-3 text-left text-white">
-            Author
-        </th>
-       
+                    <form method="" action="">
+                        <div class="mb-3 sm:mb-4 justify-center">
+                            <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['name']; ?></span>
+                        </div>
 
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['author']; ?></span>
+                        </div>
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Start</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['start_time']; ?></span>
+                        </div>
 
-    </tr>
-</thead>
-        <tbody>
-        <tr class="bg-white border md:border-pink-700 sm:border-blue-700">
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <?php echo $this->task['name']; ?>  
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <?php echo $this->task['author']; ?>  
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <?php echo $this->task['start_time']; ?>  
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <?php echo $this->task['end_time']; ?>  
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <?php echo $this->task['status'];?>
-                        </td>   
-
-        </tbody>
-    </table>
-
-</div>
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">End</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['end_time']; ?></span>
+                        </div>
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">End</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['status']; ?></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 </body>
 <?php include('partials/footer.phtml') ?>
