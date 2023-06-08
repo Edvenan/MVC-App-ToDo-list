@@ -43,17 +43,6 @@ class ToDoController extends Controller
         } 
     }
     
-    // READ ALL TASKS
-	public function showAllTasksAction(){
-        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
-            $_SESSION['db_type']= $_POST['db_type'];
-        }
-
-        $todo = $this-> setModel();
-        $tasks = $todo->getTasks();
-        $this->view->tasks = $tasks;
-    }
-    
     // READ TASK
     public function showTaskAction(){
 
@@ -64,15 +53,28 @@ class ToDoController extends Controller
             $todo = $this-> setModel();
             
             $task = $todo->getTaskById($taskId);
-            if(!$task) {
-                throw new Exception("Task not found.");
+            // error handling
+            if(is_string($task)) {
+                throw new Exception($task);
             }  
             $this->view->task = $task;
 
-        } else {
-            echo "Not found.";
-            exit;
+        } 
+    }
+
+    // READ ALL TASKS
+	public function showAllTasksAction(){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $_SESSION['db_type']= $_POST['db_type'];
         }
+
+        $todo = $this-> setModel();
+        $tasks = $todo->getTasks();
+        // error handling
+        if(is_string($tasks)) {
+            throw new Exception("ShowAllTasks: ".$tasks);  //$tasks will contain the error msg from Model
+        }
+        $this->view->tasks = $tasks;
     }
 
 	

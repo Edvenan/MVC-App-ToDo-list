@@ -38,24 +38,42 @@ class ToDoModel_json implements ToDoModelInterface {
     }
     
     // READ: method that returns an array containing all tasks
-    public function getTasks(): array{
-        (string) $jsonFile = file_get_contents(ROOT_PATH.'/app/models/data/json/data.json');
-        (array) $tasks = json_decode($jsonFile, true);  // returns array of task objects
+    public function getTasks(): array |string {
+
+        // read json database content
+        $jsonFile = file_get_contents($this->json_file);
+        // error handling
+        if (!is_string($jsonFile)){
+            return ("GetTasks-Model: json DataBase not reachable.");
+        }
+        
+        // convert contents to associative array of tasks
+        (array) $tasks = json_decode($jsonFile, true);  
+        // error handling
+        if(!$tasks){
+            return ("json DataBase is empty");
+        }
+
         return $tasks;
     }
-    
+
     // READ: method that gets a task by its 'id' from 'db_type' DataBase 
-    public function getTaskById($id){
-        // missing error handling ****************************
+    public function getTaskById($id): array | string {
+
         // get all tasks
         $tasks = $this->getTasks();
+        // error handling
+        if( (is_string($tasks)) && ($tasks != "json DataBase is empty") ){
+            return ("GetTaskById-Model: ".$tasks); // return error msg from getTasks()
+        }
 
         foreach($tasks as $task) {
             if ($task['id'] == $id) {
               return $task;
             }
         }
-        return null;
+        // handling id not found
+        return ("GetTaskById-Model: id not found in json DataBase.");
     }
 
     // UPDATE: method that updates a task and the array of tasks
