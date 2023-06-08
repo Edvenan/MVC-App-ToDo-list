@@ -102,11 +102,10 @@ class ToDoController extends Controller
                 $todo = $this-> setModel();
 
                 $result = $todo -> updateTask($newData, $taskId);
-                
-                // receiving results from model
+                // error handling
                 if (is_string($result)){
-                    throw new Exception($result);
-                } 
+                    throw new Exception ("UpdateTask: ".$result);
+                }
 
                 // redirecting to tasks list
                 header("Location: showAll");
@@ -115,7 +114,7 @@ class ToDoController extends Controller
 
             } elseif((empty($_POST["name"])) OR (empty($_POST["author"]))) {
 
-                throw new Exception("Name and Author fields are required.");
+                throw new Exception("UpdateTask: Task Name and Author fields are required.");
 
             }
 
