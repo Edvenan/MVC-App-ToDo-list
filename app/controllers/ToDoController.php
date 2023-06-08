@@ -103,14 +103,14 @@ class ToDoController extends Controller
                 $result = $todo -> updateTask($newData, $taskId);
                 
                 // receiving results from model
-                if (!$result){
-                    throw new Exception("Update failed.");
+                if (is_string($result)){
+                    throw new Exception($result);
+                } 
 
-                } else {
-                    // redirecting to tasks list
-                    header("Location: showAll");
-                    exit;
-                }
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
+                
 
             } elseif((empty($_POST["name"])) OR (empty($_POST["author"]))) {
 
@@ -132,28 +132,19 @@ class ToDoController extends Controller
 
             $todo = $this-> setModel();
 
-            $task = $todo->getTaskById($taskId);
+            $result = $todo -> deleteTask($taskId);
 
-            if(!$task) {
-                throw new Exception("Task not found.");
-            }  else {  
+            if (!$result){
+                throw new Exception("Delete failed.");
 
-                $result = $todo -> deleteTask($taskId);
-
-                // receiving results from model
-                if (!$result){
-                    throw new Exception("Delete failed.");
-
-                } else {
-                    // redirecting to tasks list
-                    header("Location: showAll");
-                    exit;
-                }
-        
+            } else {
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
             }
 
         } else {
-            echo "Not found.";
+            throw new Exception("Not found.");
             exit;
         } 
         
