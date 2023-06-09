@@ -1,48 +1,40 @@
 <?php include('partials/header.phtml') ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!--------------------------------------->
+<!-- Body -->
+<!-- <body class="pt-24 sm:pt-20 lg:pt-165 justify-end"> -->
 
-<head>
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="https://cdn.tailwindcss.com"></script>
-     <title>Document</title>
-</head>
 
-<body class="pt-24 sm:pt-20 lg:pt-165 justify-end">
-
-<div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
+<div class="body-container mt-8 flex-grow bg-gray-200 p-2 mb-1 max-h-xs justify-center">
      <div class="flex items-center justify-center">
-          <div class="w-full max-w-xs p-5 sm:p-10 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
+          <div class="w-full max-w-lg p-5 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl max-w-auto shadow-pink-700 bg-gradient-to-br from-rose-100 via-rose-200 to-purple-300 bg-white ">
 
                <div class="flex justify-center items-center">
-                    <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Add your task!</h1>
+                    <h1 class="font-semibold tracking-light text-2xl text-4xl text-center mb-8 min-w-screen">Add new task!</h1>
                </div>
-
                <form method="POST" action="">
-                    <div class="mb-3 sm:mb-4">
-                         <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
-                         <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" required>
+                    <div class="flex">   
+                    <label class="my-1 py-1  h-8 w-1/4" for="name" >Task Name</label>
+                    <input  class="my-1  h-8   w-2/3 rounded-lg" type="text"  name="name" required>
                     </div>
 
-                    <div class="mb-3 sm:mb-4">
-                         <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
-                         <input type="text" name="author" class="w-full px-3 py-2 border lg:border-pink-300 sm:border-gray-300 md:border-blue-300 rounded-lg text-sm" required>
-                    </div>
 
-                    <div class="flex justify-center mt-4 sm:mt-6">
-                         <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-pink-700 rounded-lg">Save task</button>
+                    <div class="flex">
+                         <label class="my-1 py-1 h-8 pr-2 w-1/4" for="author">Author</label>
+                         <input class="my-1  h-8 pp-2 w-2/3 rounded-lg" type="text"  name="author" required>
+                    </div>
+                    <br>
+                    <div class="pb-5 flex justify-center items-center">
+                         <button class=" pb-2 bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                              type="submit">Create task</button>
+                         </br>
                     </div>
                </form>
-          </div>
+               </div>
      </div>
 </div>
 
-</body>
+<!--------------------------------------->
 
-</body>
-
-</html>
+<!-- Your footer content here -->
 <?php include('partials/footer.phtml') ?>
