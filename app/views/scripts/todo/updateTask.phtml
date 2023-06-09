@@ -1,44 +1,52 @@
-<?php include ('partials/header.phtml') ?>
-<body class="pt-24 sm:pt-14 lg:pt-8 justify-end">
+<?php include('partials/header.phtml') ?>
 
-     <div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
-          <div class="flex items-center justify-center">
-               <div class="w-full max-w-xs p-5 sm:p-18 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
+<!--------------------------------------->
+<!-- Body -->
+<!-- <body class="pt-24 sm:pt-20 lg:pt-165 justify-end"> -->
 
-                    <div class="flex justify-center items-center">
-                         <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Update task!</h1>
+
+<div class="body-container mt-8 flex-grow bg-gray-200 p-2 mb-1 max-h-xs justify-center">
+     <div class="flex items-center justify-center">
+          <div class="w-full max-w-lg p-5 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl max-w-auto shadow-pink-700 bg-gradient-to-br from-rose-100 via-rose-200 to-purple-300 bg-white ">
+
+               <div class="flex justify-center items-center">
+                    <h1 class="font-semibold tracking-light text-2xl text-4xl text-center mb-8 min-w-screen">Update your task!</h1>
+               </div>
+               <form method="POST" action="">
+                    <div class="flex">   
+                    <label class="my-1 py-1  h-8 w-1/4" for="name" >Task Name</label>
+                    <input  class="my-1  h-8   w-2/3 rounded-lg" type="text" id="name" name="name" value="<?php echo $this->task['name']; ?>">
                     </div>
 
-                    <form method="POST" action="">
-                         <div class="mb-3 sm:mb-4 justify-center">
-                              <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
-                              <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" value=<?php echo $this->task['name']  ?>>
-                         </div>
-
-                         <div class="mb-3 sm:mb-4">
-                              <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
-                              <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" value=<?php echo $this->task['author']  ?>>
-                         </div>
-                         <!--Select-->
-                         <div class="mb-3 sm:mb-4">
-                              <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Status</label>
-                              <select id="status" name="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                   <option value="Pending" <?php if ($this->task["status"] == "Pending") echo "selected"; ?>>pending
-                                   </option>
-                                   <option value="Ongoing" <?php if ($this->task["status"] == "Ongoing") echo "selected"; ?>>
-                                        In progress</option>
-                                   <option value="Finished" <?php if ($this->task["status"] == "Finished") echo "selected"; ?>>
-                                        completed</option>
-                              </select>
-                         </div>
-               </div>
-
-
-
+                    <div class="flex">
+                         <label class="my-1 py-1 h-8 pr-2 w-1/4" for="author">Author</label>
+                         <input class="my-1  h-8 p-2 w-2/3 rounded-lg" type="text" id="author" name="author"
+                              value="<?php echo $this->task['author']; ?>">
+                    </div>
+                    <!--Select-->
+                    <div class="flex">
+                         <label for="author" class="my-1 py-1 h-8 pr-2 w-1/4">Status</label>
+                         <select id="status" name="status" class=" py-1 h-8 w-2/3 rounded-lg">
+                              <option value="Pending" <?php if ($this->task["status"] == "Pending") echo "selected"; ?>>Pending
+                              </option>
+                              <option value="Ongoing" <?php if ($this->task["status"] == "Ongoing") echo "selected"; ?>>
+                                   Ongoing</option>
+                              <option value="Finished" <?php if ($this->task["status"] == "Finished") echo "selected"; ?>>
+                                   Finished</option>
+                         </select>
+                    </div>
+                    <br>
+                    <div class="pb-5 flex justify-center items-center">
+                         <button class=" pb-2 bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                              type="submit">Save your changes</button>
+                         </br>
+                    </div>
                </form>
-          </div>
+               </div>
      </div>
 </div>
-</body>
 
-<?php include ('partials/footer.phtml') ?>
+<!--------------------------------------->
+
+<!-- Your footer content here -->
+<?php include('partials/footer.phtml') ?>
