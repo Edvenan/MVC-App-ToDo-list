@@ -13,10 +13,10 @@
 $routes = array(
 	'/'			=> 'ToDo#index',
 	'/create'	=> 'ToDo#createTask',
-	'/delete'	=> 'ToDo#deleteTask',
-	'/search'	=> 'ToDo#searchTask',
 	'/showAll'	=> 'ToDo#showAllTasks',
+	'/showTask' => 'ToDo#showTask',
+	'/sort'		=> 'ToDo#sortTasks',
 	'/update'   => 'ToDo#updateTask',
-	'/showTask' => 'ToDo#showTask'
-	
+	'/delete'	=> 'ToDo#deleteTask',
+	'/error'	=> 'error#error'
 );

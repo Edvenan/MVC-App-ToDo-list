@@ -1,19 +1,18 @@
-<!-- Your header content here -->
+<?php include('partials/headerHome.phtml') ?>
 
-<?php include ('partials/headerHome.phtml') ?>   
-
-<!---------------------------------------> 
-<body>
+<!--------------------------------------->
+<!-- Body : add class=" body-container" -->
 
 
 <div
   id="carouselExampleSlidesOnly"
-  class="relative table-container"
-
+  class=" table-container body-container "
   data-te-carousel-init
   data-te-carousel-slide>
   <!--Carousel items-->
-  <div class="relative  w-full overflow-hidden after:clear-both after:block after:content-['']">
+  <div style="height:95px;" ></div>
+
+  <div class="relative pl-2 pr-2 bg-gray-200 w-full overflow-hidden after:clear-both after:block after:content-['']">
     <!--First item-->
     <div
       class="relative float-left -mr-[100%] w-full overflow-hidden transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
@@ -23,41 +22,35 @@
         src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto4.jpg" ?>" class="block w-full"  alt="Wild Landscape" />
     </div>
     <!--Second item-->
-    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item>
-        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto1.jpg" ?>" class="block w-full" alt="Camera" />
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto2.jpg" ?>" class="block w-full" alt="Camera" />
     </div>
     <!--Third item-->
-    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item>
-        <img src="<?php echo WEB_ROOT . "/images//fotosTeamDevelop/foto2.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+        <img src="<?php echo WEB_ROOT . "/images//fotosTeamDevelop/foto8.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
     </div>
     <!--Fourth item-->
-    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item>
-        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto3.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto7.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
     </div>
     <!--Fifth item-->
-    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item>
-        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto4.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+        <img src="<?php echo WEB_ROOT . "/images/fotosTeamDevelop/foto5.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
     </div>
     <!--Sixth item-->
-    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[300ms] ease-in-out motion-reduce:transition-none"
+    <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item>
-        <img src="<?php echo WEB_ROOT . "//images/fotosTeamDevelop/foto7.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
+        <img src="<?php echo WEB_ROOT . "//images/fotosTeamDevelop/foto1.jpg" ?>" class="block w-full" alt="Exotic Fruits" />
     </div>
  </div>
 </div>
 
-
+    <div class="h-12"></div>
 <!--------------------------------------->
 </div>
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-
-</body>
-
 <!-- Your footer content here -->
-<?php include ('partials/footer.phtml') ?>
+<?php include('partials/footer.phtml') ?>

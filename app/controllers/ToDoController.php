@@ -78,9 +78,34 @@ class ToDoController extends Controller
     }
 
 	
-	/*public function searchTaskAction(){
-        $this->view->message = "TO-DO App - SEARCH TASK VIEW!!!!";
-    }*/
+    // SORT TASKS BY FIELD IN ASC ORDER
+	public function sortTasksAction(){
+
+        if(isset($_GET['sortBy'])) {
+
+            //receiving and decoding sorting field and order type (asc / desc)
+            (array) $sortBy = explode(",", $_GET['sortBy']);
+
+            (Object) $todo = $this-> setModel();
+            $tasks = $todo->getTasks();
+
+            // function that orders alphabetically an array of tasks 
+            // by a given field either in asc or desc order
+            usort($tasks, function ($a, $b) use ($sortBy) {
+                $keyA = $a[$sortBy[0]] ?? '';
+                $keyB = $b[$sortBy[0]] ?? '';
+                
+                if ( $sortBy[1] == "asc"){
+                    return strcmp($keyA, $keyB);
+                } else {
+                    return strcmp($keyB, $keyA);
+                }
+            });
+
+            $this->view->tasks = $tasks;
+
+        }
+    }
 
 
     // UPDATE TASK
