@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+  <script>
+        tailwind.config = {
+          theme: {
+            fontFamily: {
+            },
+          },
+          corePlugins: {
+          },
+        };
+  </script>
+  
+  <title>ToDo App!</title>
+  <style>
+    /* Adjust the height of the header and footer */
+    .header {
 
-    <title>ToDo App</title>
-    <style>
+        height: 95px;
+    }
+    .footer {
+      height: 60px;
+    }
+    /* Set the body container to occupy remaining vertical space */
+    .body-container {
+      flex-grow: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+    }
 
-    </style>
+  </style>
+
 </head>
+<body class="flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="header bg-gray-200 pr-2 pl-2 pt-2  justify-center fixed w-full top-0">
+    <div class="flex items-center h-20 w-full bg-pink-500 ">
+      
+                <a href="<?php echo WEB_ROOT; ?>" class="flex items-center justify-start ">
+                <img src="./images/task-list.svg" class=" w-12 ml-2" alt="logo">
+                <span class=" text-l font-semibold hover:text-gray-500 whitespace-nowrap text-white text-center justify-center ml-1">ToDo<br>App !</span>
+                </a>
 
-<body>
-
-    <header>
-        <div class=" flex justify-center  w-full h-full  mx-auto">
-            <nav class="flex justify-between bg-pink-700 sm:bg-gray-700 md:bg-blue-700 lg:bg-pink-700 text-white w-full items-center">
-
-
-                <div class="lg:flex flex-grow items-center justify-center ">
-
-                    <a href="<?php echo WEB_ROOT; ?>" class="flex items-center justify-center pr-18 lg:pr-12">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" id="list" class="h-14">
-                            <circle cx="5" cy="5.5" r="2.5" stroke="white"></circle>
-                            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M12.5 6h14"></path>
-                            <circle cx="5" cy="14.5" r="2.5" stroke="white"></circle>
-                            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M12.5 15h14"></path>
-                            <circle cx="5" cy="23.5" r="2.5" stroke="white"></circle>
-                            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M12.5 24h14"></path>
-                        </svg>
-
-                        <span class="self-center text-base font-semibold hover:text-blue-200 whitespace-nowrap text-white  pr-2 ml-2">To Do<br>App !
-                        </span>
-                    </a>
-                        <!--UL-->
-                    <ul class="flex flex-row sm:justify-center md:flex-nowrap lg:flex-wrap xl:flex-wrap uppercase px-2 mx-auto font-semibold font-heading space-x-4 sm:space-x-6 md:space-x-10 lg:space-x-12 sm:items-center">
-                        <li class="flex-grow text-left md:text-center lg:text-center  lg:mr-14 justify-center">
-                            <a class="text-xs md:text-base sm:text-sm lg:text-lg hover:text-blue-200 py-2 px-4 rounded bg-blue-500 text-white hover:bg-blue-600" href="create">Add New Task</a>
-                        </li>
-                        <li class="flex-grow text-right md:text-center  lg:text-center justify-center">
-                            <a class="text-xs md:text-base sm:text-sm lg:text-lg  hover:text-blue-200 py-2 px-4 rounded bg-blue-500 text-white hover:bg-blue-600" href="showAll">Show all Tasks</a>
-                        </li>
-                    </ul>
-                    <form class="flex flex-col justify-center items-center ml-auto sm:flex-nowrap md:justify-end lg:justify-center xl:justify-center md:mt-4 lg:ml-4" id="myForm" method="POST" action="showAll">
-                        <label data-te-select-label-ref style="color:white;">Database type</label>
-                        <!--SELECT-->
-                        <select name="db_type" data-te-select-init onchange="submitForm()">
-
-                            <option value="json" data-te-select-icon="https://cdn.iconscout.com/icon/free/png-512/free-json-file-1-504451.png?f=avif&w=256" <?php if ($_SESSION['db_type'] == 'json')
-                                                                                                                                                                echo 'selected'; ?>>JSON</option>
-                            <option value="mysql" data-te-select-icon="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_mysql_icon_130379.png" <?php if ($_SESSION['db_type'] == 'mysql')
-                                                                                                                                                            echo 'selected'; ?>>MySQL</option>
-                            <option value="mongodb" data-te-select-icon="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_logo_icon_146424.png" <?php if ($_SESSION['db_type'] == 'mongodb')
-                                                                                                                                                                    echo 'selected'; ?>>MongoDB</option>
-                        </select>
-                        <script>
-                            function submitForm() {
-                                document.getElementById('myForm').submit();
-                            }
-                        </script>
-                    </form>
+                <div class="flex flex-wrap justify-center uppercase px-1 mx-auto font-semibold font-heading text-sm">
+                    <div class="text-center  flex-grow justify-between m-1">
+                        <a class="  hover:text-white py-1 px-3 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-700" href="create">Add New Task</a>
+                    </div>
+                    <div class="text-center flex-grow justify-between m-1">
+                        <a class=" hover:text-white py-1 px-3 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-700" href="showAll">View all Tasks</a>
+                    </div>
                 </div>
-        </div>
-        </nav>
-        </div>
 
-    </header>
+            <!-- SELECT button -->
+            <form class="flex flex-col justify-end items-center w-32 text-sm flex-nowrap mr-4" style="color:white" id="myForm" method="POST" action="showAll">
+                <select name="db_type" data-te-select-init onchange="submitForm()">
+                    <option value="json" data-te-select-icon="https://cdn.iconscout.com/icon/free/png-512/free-json-file-1-504451.png?f=avif&w=256"
+                          <?php if ($_SESSION['db_type'] == 'json')
+                    echo 'selected'; ?>>JSON</option>
+                    <option value="mysql" data-te-select-icon="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_mysql_icon_130379.png"
+                          <?php if ($_SESSION['db_type'] == 'mysql')
+                    echo 'selected'; ?>>MySQL</option> 
+                    <option value="mongodb" data-te-select-icon="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_logo_icon_146424.png"
+                          <?php if ($_SESSION['db_type'] == 'mongodb')
+                    echo 'selected'; ?>>MongoDB</option>
+                </select>
+                <label data-te-select-label-ref style="color:white">Choose DB: </label>
+                <script>
+                    function submitForm() {
+                    document.getElementById('myForm').submit();
+                    }
+                </script>
+            </form>
 
-</body>
-
-</html>
+    </div>
+  </header>
