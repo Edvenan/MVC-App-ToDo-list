@@ -1,40 +1,44 @@
 <?php include ('partials/header.phtml') ?>
-<div class="grid grid-cols-3 gap-1">
-     <div></div>
-     <div class="max-w-sm rounded overflow-hidden shadow-lg">
-          <div class="text-xl pb-5 pl-20 pt-10">
-          UPDATE TASK
+<body class="pt-24 sm:pt-14 lg:pt-8 justify-end">
+
+     <div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
+          <div class="flex items-center justify-center">
+               <div class="w-full max-w-xs p-5 sm:p-18 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
+
+                    <div class="flex justify-center items-center">
+                         <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Update task!</h1>
+                    </div>
+
+                    <form method="POST" action="">
+                         <div class="mb-3 sm:mb-4 justify-center">
+                              <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
+                              <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" value=<?php echo $this->task['name']  ?>>
+                         </div>
+
+                         <div class="mb-3 sm:mb-4">
+                              <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
+                              <input type="text" name="name" class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm" value=<?php echo $this->task['author']  ?>>
+                         </div>
+                         <!--Select-->
+                         <div class="mb-3 sm:mb-4">
+                              <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Status</label>
+                              <select id="status" name="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                   <option value="Pending" <?php if ($this->task["status"] == "Pending") echo "selected"; ?>>pending
+                                   </option>
+                                   <option value="Ongoing" <?php if ($this->task["status"] == "Ongoing") echo "selected"; ?>>
+                                        In progress</option>
+                                   <option value="Finished" <?php if ($this->task["status"] == "Finished") echo "selected"; ?>>
+                                        completed</option>
+                              </select>
+                         </div>
+               </div>
+
+
+
+               </form>
           </div>
-          <div>
-               <form method="POST" action="">
-                    <div>   
-                    <label class="pr-2" for="name" > Name</label>
-                    <input  class="pb-2" type="text" id="name" name="name" value="<?php echo $this->task['name'];?>">
-                    </div>
-                    <div>
-                    <label class="pr-2" for="status" > Status </label>
-                    <input  class="pb-2" type="text" id="status" name="status" value="<?php echo $this->task['status'];?>" >
-                    </div>
-                    <div>
-                    <label class="pr-2" for="start_time" > Start-Time</label>
-                    <label  class="pb-2" type="text" id="start-time" name="start_time" >Data</label>
-                    </div>
-                    <div>
-                    <label class="pr-2" for="end_time" >End-Time</label>
-                    <label  class="pb-2" type="text" id="end-time" name="end_time">Data</label>
-                    </div>
-                    <div>
-                    <label class="pr-2" for="author" > Author</label>
-                    <input  class="pb-5" type="text" id="author" name="author" value="<?php echo $this->task['author'];?>" >
-                    </div>
-                    <div class="pb-5 pl-20">
-                    <button class=" pb-2 bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Save your changes</button>
-                    </br>
-                    </div>
-               </form> 
-          </div> 
      </div>
-     <div class="pt-5"></div>    
 </div>
+</body>
 
 <?php include ('partials/footer.phtml') ?>
