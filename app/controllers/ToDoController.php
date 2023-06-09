@@ -7,101 +7,191 @@
 class ToDoController extends Controller 
 {
 	
+    ###############################################
+    # HOME:                                       #
+    ###############################################
     // home method that will show main menu
     public function indexAction(){
-        $this->view->message = "TO-DO App - HOME VIEW!!!!";
     }
 
+
+    ################################################
+    # CRUD: CONTROLLER METHODS                     #    
+    ################################################
+
+    // CREATE TASK
+    public function createTaskAction(){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST') &&  (!empty($_POST["name"])) && (!empty($_POST["author"]))) {
+
+            //Get new data from user
+            $name = $_POST['name'];
+            $author = $_POST['author'];
+
+            $todo = $this-> setModel();
+            
+            //Snd them to model to create task
+            $result = $todo -> createTask($name, $author);
+            
+            if (is_string($result)){
+                throw new Exception("CreateTask: ".$result);
+
+            } else {
+                // redirect to tasks list
+                header("Location:showAll");
+                exit;
+            }
+        } 
+    }
+    
+    // READ TASK
     public function showTaskAction(){
 
-        if(isset($_GET['id'])) {
-
-            $todo = new ToDoModel();
+        if (isset($_GET['id'])) {
+            
             $taskId = $_GET['id'];
-            $task = $todo->getTaskById($taskId);
-            if(!$task) {
-                echo "Task not found.";
-                exit;
-            } 
 
+            $todo = $this-> setModel();
+            
+            $task = $todo->getTaskById($taskId);
+            // error handling
+            if(is_string($task)) {
+                throw new Exception($task);
+            }  
             $this->view->task = $task;
 
-        } else {
-            echo "Sorry, not found.";
-            exit;
-        }
-    }
-
-	public function createTaskAction(){
-        $this->view->message = "TO-DO App - CREATE TASK VIEW!!!!";
-    }
-
-	public function deleteTaskAction(){
-
-        if(isset($_GET['id'])) {
-
-            $todo = new ToDoModel();
-            $taskId = $_GET['id'];
-            $task = $todo->getTaskById($taskId);
-
-            if(!$task) {
-                echo "Task not found.";
-                exit;
-            }  else {  
-                $todo -> deleteTask($taskId);
-            }
-
-            header("Location: showAll");
-
-        } else {
-            echo "Not found.";
-            exit;
         } 
-        
     }
 
-	/*public function searchTaskAction(){
-        $this->view->message = "TO-DO App - SEARCH TASK VIEW!!!!";
-    }*/
-
+    // READ ALL TASKS
 	public function showAllTasksAction(){
-        $todo = new ToDoModel();
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $_SESSION['db_type']= $_POST['db_type'];
+        }
+
+        $todo = $this-> setModel();
         $tasks = $todo->getTasks();
-        if(!$tasks) {
-            echo "Tasks not found.";
-            exit;
-        } 
+        // error handling
+        if(is_string($tasks)) {
+            throw new Exception("ShowAllTasks: ".$tasks);  //$tasks will contain the error msg from Model
+        }
         $this->view->tasks = $tasks;
     }
 
-	public function updateTaskAction(){
-        
+	
+    // SORT TASKS BY FIELD IN ASC ORDER
+	public function sortTasksAction(){
+
+        if(isset($_GET['sortBy'])) {
+
+            //receiving and decoding sorting field and order type (asc / desc)
+            (array) $sortBy = explode(",", $_GET['sortBy']);
+
+            (Object) $todo = $this-> setModel();
+            $tasks = $todo->getTasks();
+
+            // function that orders alphabetically an array of tasks 
+            // by a given field either in asc or desc order
+            usort($tasks, function ($a, $b) use ($sortBy) {
+                $keyA = $a[$sortBy[0]] ?? '';
+                $keyB = $b[$sortBy[0]] ?? '';
+                
+                if ( $sortBy[1] == "asc"){
+                    return strcmp($keyA, $keyB);
+                } else {
+                    return strcmp($keyB, $keyA);
+                }
+            });
+
+            $this->view->tasks = $tasks;
+
+        }
+    }
+
+
+    // UPDATE TASK
+    public function updateTaskAction(){
+
         $this -> showTaskAction();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $todo = new ToDoModel();
+            if ((!empty($_POST["name"])) && (!empty($_POST["author"]))) {
+
+                $taskId = $_GET['id'];
+
+                // receiving new data
+                $newData['name']   = $_POST['name'];
+                $newData['status'] = $_POST['status'];
+                $newData['author'] = $_POST['author'];
+
+                // sending new data to Model 
+                $todo = $this-> setModel();
+
+                $result = $todo -> updateTask($newData, $taskId);
+                // error handling
+                if (is_string($result)){
+                    throw new Exception ("UpdateTask: ".$result);
+                }
+
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
+                
+
+            } elseif((empty($_POST["name"])) OR (empty($_POST["author"]))) {
+
+                throw new Exception("UpdateTask: Task Name and Author fields are required.");
+
+            }
+
+        }
+
+
+    }
+
+    // DELETE TASK
+	public function deleteTaskAction(){
+
+        if(isset($_GET['id'])) {
+
             $taskId = $_GET['id'];
 
-            //Recollim les noves dades
-            $newData = $_POST;
+            $todo = $this-> setModel();
 
-            //Les enviem al model
-            $todo -> updateTask($newData, $taskId);
-             
-            //Redirigim al llistat total
-            header("Location: showAll");
-            exit;
-            
-            //tests
-            /*echo '<pre>';
-            var_dump($task);
-            echo '<pre>';
+            $result = $todo -> deleteTask($taskId);
 
-            echo '<pre>';
-            var_dump($_POST);
-            echo '<pre>';*/
-        
+            if (!$result){
+                throw new Exception("Delete failed.");
+
+            } else {
+                // redirecting to tasks list
+                header("Location: showAll");
+                exit;
+            }
+
+        } else {
+            throw new Exception("Not found.");
         } 
+        
     }
+
+    ###############################################
+    # HELPER FUNCTIONS                            #
+    ###############################################
+
+    // helper function
+    public function setModel(): Object {
+        switch ($_SESSION['db_type']){
+
+            case "json":
+                return new ToDoModel_json();
+            case "mysql":
+                return new ToDoModel_mysql();
+            case "mongodb":
+                return new ToDoModel_mongo();
+            default:
+            throw new Exception("Wrong DataBase!");
+        }
+    }
+
 }

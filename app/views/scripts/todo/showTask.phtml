@@ -1,35 +1,41 @@
-<?php include ('partials/header.phtml') ?>
+<?php include('partials/header.phtml') ?>
+<body class="pt-24 sm:pt-14 lg:pt-8 justify-end">
 
-   
-<div class="grid grid-cols-3 gap-1">
-   <div></div>
-   <div>
-     <div class="pl-20 pb-5 text-xl"> TASK VIEW</div>
-     <table>
-        <tr> 
-            <th class="p-2"> Task</th>
-            <td class="p-2"><?php echo $this->task['name'];?> </td>
-        </tr>
-        <tr> 
-            <th class="p-2"> Author</th>
-            <td class="p-2"><?php echo $this->task['author'];?></td>
-        </tr>
-        <tr> 
-            <th class="p-2"> Start</th>
-            <td class="p-2"> <?php echo $this->task['start_time'];?></td>
-        </tr>
-        <tr> 
-            <th class="p-2"> End </th>
-            <td class="p-2"><?php echo $this->task['end_time'];?> </td>
-        </tr>
-        <tr> 
-            <th class="p-2"> Status </th>
-            <td class="p-2"><?php echo $this->task['status'];?> </td>
-        </tr>
+        <div class="container mx-auto max-h-xs max-w-md pt-24 justify-center">
+            <div class="flex items-center justify-center">
+                <div class="w-full max-w-xs p-5 sm:p-18 overflow-x-auto rounded-lg  shadow-xl rounded-lg shadow-xl sm:shadow-gray-700 md:shadow-blue-700 lg:shadow-pink-700 max-w-auto shadow-pink-700 bg-gradient-to-br from-slate-500 sm:via-gray-300 to-current bg-gradient-to-br md:from-indigo-300 bg-gradient-to-tl lg:from-rose-100 via-rose-200 to-purple-300 bg-white sm:bg-gradient-to-br sm:from-white sm:via-gray-300 sm:to-current">
 
-     </table>
+                    <div class="flex justify-center items-center">
+                        <h1 class="font-semibold tracking-light text-2xl sm:text-3xl md:text-4xl text-center my-2 min-w-screen">Task view!</h1>
+                    </div>
 
-   </div>
-   <div></div>
-</div>   
-<?php include ('partials/footer.phtml') ?>
+                    <form method="" action="">
+                        <div class="mb-3 sm:mb-4 justify-center">
+                            <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Task Name</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['name']; ?></span>
+                        </div>
+
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Author</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['author']; ?></span>
+                        </div>
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">Start</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['start_time']; ?></span>
+                        </div>
+
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">End</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['end_time']; ?></span>
+                        </div>
+                        <div class="mb-3 sm:mb-4">
+                            <label for="author" class="block mb-1 text-sm font-medium text-gray-900">End</label>
+                            <span class="w-full px-3 py-2 border sm:border-gray-300 lg:border-pink-300 md:border-blue-300 rounded-lg text-sm"><?php echo $this->task['status']; ?></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+</body>
+<?php include('partials/footer.phtml') ?>
