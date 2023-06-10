@@ -7,8 +7,8 @@ Each task contains the following information or fields:
 - Task name
 - Task author
 - Task status (Pending / Ongoing / Finished)
-- Task start time (the date & time when task status is set to 'Ongoing' - in blank if taks status is set to 'Pending')
-- Task end time (the date & time when task status is set to 'Finished - in blank if taks status is set to 'Pending')
+- Task start time (the date & time when task status is set to 'Ongoing' - in blank if task status is set to 'Pending')
+- Task end time (the date & time when task status is set to 'Finished - in blank if task status is set to 'Pending')
 
 The app allows you to **list** all the tasks and **sort** them by field, both in ascendent and descendent order.
 
