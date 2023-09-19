@@ -1,7 +1,7 @@
 # ToDo App! 
 ## The web app that allows you to keep track of tasks created by different people.
 
-The app allows you to **create**, **view**, **update** and **delete** tasks and hasbeen developed following the **MVC** software design pattern.
+The app allows you to **create**, **view**, **update** and **delete** tasks and has been developed in **PHP** following the **MVC** software design pattern.
 
 Each task contains the following information or fields:
 - Task name
